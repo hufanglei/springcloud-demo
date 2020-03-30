@@ -254,9 +254,10 @@
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
     <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/demo-mybaits/doc" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/doc/2" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -436,7 +437,7 @@
       <workItem from="1585197705481" duration="9854000" />
       <workItem from="1585268916499" duration="11456000" />
       <workItem from="1585534176127" duration="18837000" />
-      <workItem from="1585566025658" duration="249000" />
+      <workItem from="1585566025658" duration="501000" />
     </task>
     <servers />
   </component>
@@ -473,7 +474,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43743000" />
+    <option name="totallyTimeSpent" value="43995000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -485,7 +486,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6363636" visible="true" weight="0.20040214" />
       <window_info id="Structure" order="1" sideWeight="0.36363637" side_tool="true" weight="0.28384614" />
