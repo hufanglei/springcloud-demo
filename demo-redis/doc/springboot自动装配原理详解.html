@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="tool" content="leanote-desktop-app">
+<title>springboot自动装配原理详解</title>
+<style>
+
+*{font-family:"lucida grande","lucida sans unicode",lucida,helvetica,"Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;}
+
+body {
+  margin: 0;
+}
+
+/*公用文字样式*/
+h1{font-size:30px}h2{font-size:24px}h3{font-size:18px}h4{font-size:14px}
+.note-container{
+    width:850px; 
+    margin:auto;
+    padding: 10px 20px;
+    box-shadow: 1px 1px 10px #eee;
+}
+#title {
+  margin: 0;
+}
+table {
+    margin-bottom: 16px;
+    border-collapse: collapse;
+}
+table th, table td {
+    padding: 6px 13px;
+    border: 1px solid #ddd;
+}
+table th {
+    font-weight: bold;
+}
+
+table tr {
+    background-color: none;
+    border-top: 1px solid #ccc;
+}
+table tr:nth-child(2n) {
+    background-color: rgb(247, 247, 249);
+}
+.mce-item-table, .mce-item-table td, .mce-item-table th, .mce-item-table caption {
+  border: 1px solid #ddd;
+  border-collapse: collapse;
+  padding: 6px 13px;
+}
+blockquote {
+  border-left-width:10px;
+  background-color:rgba(128,128,128,0.05);
+  border-top-right-radius:5px;
+  border-bottom-right-radius:5px;
+  padding:15px 20px;
+  border-left:5px solid rgba(128,128,128,0.075);
+}
+blockquote p {
+  margin-bottom:1.1em;
+  font-size:1em;
+  line-height:1.45
+}
+blockquote ul:last-child,blockquote ol:last-child {
+  margin-bottom:0
+}
+pre {
+  padding: 18px;
+  background-color: #f7f7f9;
+  border: 1px solid #e1e1e8;
+  border-radius: 3px;
+  display: block;
+}
+code {
+  padding: 2px 4px;
+  font-size: 90%;
+  color: #c7254e;
+  white-space: nowrap;
+  background-color: #f9f2f4;
+  border-radius: 4px;
+}
+.footnote {
+  vertical-align: top;
+  position: relative;
+  top: -0.5em;
+  font-size: .8em;
+}
+
+hr {
+  margin:2em 0
+}
+img {
+  max-width:100%
+}
+pre {
+  word-break:break-word
+}
+p,pre,pre.prettyprint,blockquote {
+  margin:0 0 1.1em
+}
+hr {
+  margin:2em 0
+}
+img {
+  max-width:100%
+}
+.sequence-diagram,.flow-chart {
+  text-align:center;
+  margin-bottom:1.1em
+}
+.sequence-diagram text,.flow-chart text {
+  font-size:15px !important;
+  font-family:"Source Sans Pro",sans-serif !important
+}
+.sequence-diagram [fill="#ffffff"],.flow-chart [fill="#ffffff"] {
+  fill:#f6f6f6
+}
+.sequence-diagram [stroke="#000000"],.flow-chart [stroke="#000000"] {
+  stroke:#3f3f3f
+}
+.sequence-diagram text[stroke="#000000"],.flow-chart text[stroke="#000000"] {
+  stroke:none
+}
+.sequence-diagram [fill="#000"],.flow-chart [fill="#000"],.sequence-diagram [fill="#000000"],.flow-chart [fill="#000000"],.sequence-diagram [fill="black"],.flow-chart [fill="black"] {
+  fill:#3f3f3f
+}
+ul,ol {
+  margin-bottom:1.1em
+}
+ul ul,ol ul,ul ol,ol ol {
+  margin-bottom:1.1em
+}
+kbd {
+  padding:.1em .6em;
+  border:1px solid rgba(63,63,63,0.25);
+  -webkit-box-shadow:0 1px 0 rgba(63,63,63,0.25);
+  box-shadow:0 1px 0 rgba(63,63,63,0.25);
+  font-size:.7em;
+  font-family:sans-serif;
+  background-color:#fff;
+  color:#333;
+  border-radius:3px;
+  display:inline-block;
+  margin:0 .1em;
+  white-space:nowrap
+}
+.toc ul {
+  list-style-type:none;
+  margin-bottom:15px
+}
+</style>
+<!-- 该css供自定义样式 -->
+<link href="../leanote-html.css" rel="stylesheet">
+</head>
+
+<body>
+
+	<div class="note-container">
+		<h1 class="title" id="leanote-title">springboot自动装配原理详解</h1>
+		<div class="content-html" id="leanote-content"><p><span style="font-size: 18pt;" data-mce-style="font-size: 18pt;"><strong>1)传统ssm整合redis的时候 需要在xml的配置文件中 进行大量的配置Bean</strong></span></p><p><span style="font-size: 18pt;" data-mce-style="font-size: 18pt;"><strong>&nbsp; &nbsp;</strong><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;">我们在这里使用springboot来代替ssm的整合，只是通过xml的形式来整合redis</span></span></p><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;"><strong>第一步:加入配置</strong></span></p><pre id="leanote_ace_1553774929170_0" class="brush:java ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 231px;">&lt;dependency&gt;
+	&lt;groupId&gt;org.springframework.data&lt;/groupId&gt;
+	&lt;artifactId&gt;spring-data-redis&lt;/artifactId&gt;
+	&lt;version&gt;2.0.9.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+	&lt;groupId&gt;redis.clients&lt;/groupId&gt;
+	&lt;artifactId&gt;jedis&lt;/artifactId&gt;
+	&lt;version&gt;2.9.0&lt;/version&gt;
+&lt;/dependency&gt;﻿</pre><p><span style="font-size: 14pt; line-height: 34.2857px;" data-mce-style="font-size: 14pt; line-height: 34.2857px;"><strong>第二步: 配置xml的bean的配置</strong></span></p><pre id="leanote_ace_1553774976378_0" class="ace-tomorrow brush:xml" draggable="false" data-mce-style="line-height: 1.5; font-size: 14px; height: 672px;">&nbsp;&nbsp;&nbsp;&nbsp;//配置连接池
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;bean&nbsp;id="poolConfig"&nbsp;class="redis.clients.jedis.JedisPoolConfig"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;property&nbsp;name="minIdle"&nbsp;value="10"&gt;&lt;/property&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;property&nbsp;name="maxTotal"&nbsp;value="20"&gt;&lt;/property&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/bean&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//配置连接工厂
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;bean&nbsp;id="jedisConnectionFactory"&nbsp;class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;property&nbsp;name="hostName"&nbsp;value="47.104.128.12"&gt;&lt;/property&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;property&nbsp;name="password"&nbsp;value="123456"&gt;&lt;/property&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;property&nbsp;name="database"&nbsp;value="0"&gt;&lt;/property&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;property&nbsp;name="poolConfig"&nbsp;ref="poolConfig"&gt;&lt;/property&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/bean&gt;
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;//配置&nbsp;redisTemplate&nbsp;模版类
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;bean&nbsp;id="redisTemplate"&nbsp;class="org.springframework.data.redis.core.RedisTemplate"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;property&nbsp;name="connectionFactory"&nbsp;&nbsp;ref="jedisConnectionFactory"/&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--如果不配置Serializer，那么存储的时候缺省使用String，如果用User类型存储，那么会提示错误User&nbsp;can't&nbsp;cast&nbsp;to&nbsp;String！！&nbsp;&nbsp;--&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;property&nbsp;name="keySerializer"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;bean&nbsp;class="org.springframework.data.redis.serializer.StringRedisSerializer"/&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/property&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;property&nbsp;name="valueSerializer"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;bean&nbsp;class="org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer"/&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/property&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;property&nbsp;name="hashKeySerializer"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;bean&nbsp;class="org.springframework.data.redis.serializer.StringRedisSerializer"/&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/property&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;property&nbsp;name="hashValueSerializer"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;bean&nbsp;class="org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer"/&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/property&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/bean&gt;</pre><p><strong><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;">第三步:导入配置</span></strong></p><p><strong><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;">@ImportResource(locations = "classpath:beans.xml") &nbsp;可以导入xml的配置文件<br></span></strong></p><pre id="leanote_ace_1553775083408_0" class="ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 378px;">@SpringBootApplication
+@ImportResource(locations&nbsp;=&nbsp;"classpath:beans.xml")
+@RestController
+public&nbsp;class&nbsp;TulingOpenAutoconfigPrincipleApplication&nbsp;{
+
+	@Autowired
+	private&nbsp;RedisTemplate&nbsp;redisTemplate;
+
+	public&nbsp;static&nbsp;void&nbsp;main(String[]&nbsp;args)&nbsp;{
+		SpringApplication.run(TulingOpenAutoconfigPrincipleApplication.class,&nbsp;args);
+	}
+
+	@RequestMapping("/testRedis")
+	public&nbsp;String&nbsp;testRedis()&nbsp;{
+		redisTemplate.opsForValue().set("smlz","smlz");
+		return&nbsp;"OK";
+	}
+}</pre><p>&nbsp;<br></p><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;"><strong>2)综上所述 我们发现，若整合redis的时候通过传统的整合，进行了大量的配置,那么我们来看下通过<span style="color: #ff0000;" data-mce-style="color: #ff0000;">springboot自动装配</span>整合的对比</strong></span></p><p><span style="font-size: 18.6667px; line-height: 26.6667px;" data-mce-style="font-size: 18.6667px; line-height: 26.6667px;"><strong>导入依赖:</strong></span></p><pre id="leanote_ace_1553776723924_0" class="ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 84px;">		&lt;dependency&gt;
+			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;
+		&lt;/dependency&gt;</pre><p><strong><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;">修改yml配置文件</span></strong></p><pre id="leanote_ace_1553776770112_0" class="ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 63px;">spring.redis.host=47.104.128.12
+spring.redis.port=6379
+spring.redis.password=123456</pre><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;"><strong>直接使用(下述代码可以不要配置，为了解决保存使用jdk的序列方式才配置的)</strong></span></p><pre id="leanote_ace_1553776824266_0" class="ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 168px;">&nbsp;&nbsp;&nbsp;&nbsp;
+	@Bean
+	public&nbsp;RedisTemplate&lt;Object,&nbsp;Object&gt;&nbsp;redisTemplate(RedisConnectionFactory&nbsp;redisConnectionFactory)&nbsp;&nbsp;{
+		RedisTemplate&lt;Object,&nbsp;Object&gt;&nbsp;template&nbsp;=&nbsp;new&nbsp;RedisTemplate&lt;&gt;();
+		template.setDefaultSerializer(new&nbsp;Jackson2JsonRedisSerializer&lt;Object&gt;(Object.class));
+		template.setConnectionFactory(redisConnectionFactory);
+		return&nbsp;template;
+	}​</pre><p>&nbsp;<br></p><p><span style="font-size: 14pt; color: #ff0000;" data-mce-style="font-size: 14pt; color: #ff0000;"><strong>3）传统整合和springboot自动装配 优劣势分析。。。。。。。。。。。。</strong></span></p><p>&nbsp;<br></p><p>&nbsp;<br></p><p><span style="font-size: 18pt; color: #ff0000;" data-mce-style="font-size: 18pt; color: #ff0000;"><strong>4）自动装配原理前的不得不说的几个注解</strong></span></p><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;"><strong>4.1)通过@Import注解来导入ImportSelector组件</strong></span></p><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;"><strong>①:写一个配置类在配置类上标注一个@Import的注解，</strong></span></p><pre id="leanote_ace_1553778855712_0" class="brush:java ace-tomorrow" draggable="false" data-mce-style="line-height: 1.5; font-size: 14px; height: 84px;">@Configuration
+@Import(value&nbsp;=&nbsp;{TulingSelector.class})
+public&nbsp;class&nbsp;TulingConfig&nbsp;{
+}﻿​</pre><p><span style="font-size: 12pt;" data-mce-style="font-size: 12pt;"><strong>②：在@Import注解的value值 &nbsp;写自己需要导入的组件&nbsp;</strong></span></p><p><span style="font-size: 12pt;" data-mce-style="font-size: 12pt;"><strong>&nbsp; &nbsp; &nbsp; &nbsp;在selectImports方法中 就是你需要导入组件的全类名</strong></span></p><pre id="leanote_ace_1553066614757_0" class="brush:java ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 126px;">public&nbsp;class&nbsp;TulingSelector&nbsp;implements&nbsp;ImportSelector&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;@Override
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;String[]&nbsp;selectImports(AnnotationMetadata&nbsp;annotationMetadata)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;new&nbsp;String[]{"com.tuling.service.TulingServiceImpl"};
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}</pre><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;"><strong>核心代码:</strong></span></p><pre id="leanote_ace_1553066670200_0" class="ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 441px;">@RestController
+public&nbsp;class&nbsp;TulingController&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//自动注入&nbsp;tulingServiceImpl
+&nbsp;&nbsp;&nbsp;&nbsp;@Autowired
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;TulingServiceImpl&nbsp;tulingServiceImpl;
+
+&nbsp;&nbsp;&nbsp;&nbsp;@RequestMapping("testTuling")
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;String&nbsp;testTuling()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tulingServiceImpl.testService();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;"tulingOk";
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}
+
+这里是没有标注其他注解提供给spring包扫描的
+public&nbsp;class&nbsp;TulingServiceImpl&nbsp;{
+
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;testService()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("我是通过importSelector导入进来的service");
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}</pre><p><strong><img id="__LEANOTE_D_IMG_1553778750915" src="springboot自动装配原理详解_files/5c9cc83f234993087a000009.png" alt="" width="1052" height="470" data-mce-src="springboot自动装配原理详解_files/5c9cc83f234993087a000009.png"></strong></p><p>&nbsp;<br></p><p>&nbsp;<br></p><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;"><strong>1.2）通过@Import导入ImportBeanDefinitionRegistrar 从而进来导入组件</strong></span></p><p><img id="__LEANOTE_D_IMG_1553778750916" src="springboot自动装配原理详解_files/5c9cc83f234993087a00000a.png" alt="" data-mce-src="springboot自动装配原理详解_files/5c9cc83f234993087a00000a.png"></p><p>核心代码:</p><pre id="leanote_ace_1553067191293_0" class="ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 609px;">public&nbsp;class&nbsp;TulingImportBeanDefinitionRegistrar&nbsp;implements&nbsp;ImportBeanDefinitionRegistrar&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;@Override
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;registerBeanDefinitions(AnnotationMetadata&nbsp;annotationMetadata,&nbsp;BeanDefinitionRegistry&nbsp;beanDefinitionRegistry)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//定义一个BeanDefinition
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RootBeanDefinition&nbsp;rootBeanDefinition&nbsp;=&nbsp;new&nbsp;RootBeanDefinition(TulingDao.class);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//把自定义的bean定义导入到容器中
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;beanDefinitionRegistry.registerBeanDefinition("tulingDao",rootBeanDefinition);
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}​
+
+通过ImportSelector功能导入进来的
+public&nbsp;class&nbsp;TulingServiceImpl&nbsp;{
+
+&nbsp;&nbsp;&nbsp;&nbsp;@Autowired
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;TulingDao&nbsp;tulingDao;
+
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;testService()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tulingDao.testTulingDao();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("我是通过importSelector导入进来的service");
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}
+
+通过ImportBeanDefinitionRegistar导入进来的
+public&nbsp;class&nbsp;TulingDao&nbsp;{
+
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;testTulingDao()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("我是通过ImportBeanDefinitionRegistrar导入进来tulingDao组件");
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}</pre><p><strong>测试结果:</strong></p><p><strong><img id="__LEANOTE_D_IMG_1553778750917" src="springboot自动装配原理详解_files/5c9cc83f234993087a00000b.png" alt="" width="1165" height="401" data-mce-src="springboot自动装配原理详解_files/5c9cc83f234993087a00000b.png"></strong></p><p>&nbsp;<br></p><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;"><strong>1.3)spring底层条件装配的原理@Conditional</strong></span></p><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;"><strong>应用要求</strong><strong>:比如我有二个组件,一个是TulingLog &nbsp;一个是TulingAspect</strong></span></p><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;"><strong>而TulingLog 是依赖TulingAspect的 只有容器中有TulingAspect组件才会加载TulingLog</strong></span></p><pre id="leanote_ace_1553068574965_0" class="ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 168px;">tulingLog组件&nbsp;&nbsp;依赖TulingAspect组件
+public&nbsp;class&nbsp;TulingLog&nbsp;{
+}
+
+tulingAspect组件
+public&nbsp;class&nbsp;TulingAspect&nbsp;{
+}
+</pre><p><strong>①:自定义条件组件条件</strong></p><pre id="leanote_ace_1553068653922_0" class="ace-tomorrow" draggable="false" data-mce-style="line-height: 1.5; font-size: 14px; height: 945px;">public&nbsp;class&nbsp;TulingConditional&nbsp;implements&nbsp;Condition&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;@Override
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;boolean&nbsp;matches(ConditionContext&nbsp;conditionContext,&nbsp;AnnotatedTypeMetadata&nbsp;annotatedTypeMetadata)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//容器中包含tulingAspect组件才返回Ture
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(conditionContext.getBeanFactory().containsBean("tulingAspect")){
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;true;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}else{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;false;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;-------------------------------------该情况下会加载二个组件-------------------------------------------------
+
+&nbsp;&nbsp;&nbsp;&nbsp;@Bean
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;TulingAspect&nbsp;tulingAspect()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("TulingAspect组件自动装配到容器中");
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;new&nbsp;TulingAspect();
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;@Bean
+&nbsp;&nbsp;&nbsp;&nbsp;@Conditional(value&nbsp;=&nbsp;TulingConditional.class)
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;TulingLog&nbsp;tulingLog()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("TulingLog组件自动装配到容器中");
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;new&nbsp;TulingLog();
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;-------------------------------------二个组件都不会被加载----------------------------------------
+&nbsp;&nbsp;&nbsp;&nbsp;/*@Bean**/
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;TulingAspect&nbsp;tulingAspect()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("TulingAspect组件自动装配到容器中");
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;new&nbsp;TulingAspect();
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;@Bean
+&nbsp;&nbsp;&nbsp;&nbsp;@Conditional(value&nbsp;=&nbsp;TulingConditional.class)
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;TulingLog&nbsp;tulingLog()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("TulingLog组件自动装配到容器中");
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;new&nbsp;TulingLog();
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;</pre><p>&nbsp;<br></p><p><span style="font-size: 18pt;" data-mce-style="font-size: 18pt;"><strong><span style="color: #ff0000;" data-mce-style="color: #ff0000;">自动装配原理分析 &nbsp;从@SpringbootApplication入手分析</span></strong></span><br></p><p><span style="font-size: 18pt;" data-mce-style="font-size: 18pt;"><strong><span style="color: #ff0000;" data-mce-style="color: #ff0000;"><img src="data:image/png;base64,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gKcISFjxFFm1KwIiIAIiIAIiIAIiIAIi4BMELp0/iYOrF6JIlbooUqWOT8SkIERABFKOgISVlGOplkRABERABERABERABERABHyUwLW/f8eRTcvhlyUQxao1QPb8xXw0UoUlAiKQVAISVpJKTOeLgAiIgAiIgAiIgAiIgAhkWAKn925BxN4tyJozL/KUKI/sBUuYY//ArBmWiQIXgYxOQMJKRr8DFL8IiIAIiIAIiIAIiIAIiECSCfzx6378dfInXP4tApEX/0Bs1LUkt6ELRCC9Eaj9zpj0NmSvjFfCilcwqxMREAEREAEREAEREAEREAEREAEREAFfJCBhxRdnVTGJgAiIgAiIgAiIgAiIgAiIgAiIgAh4hYCEFa9gViciIAIiIAIiIAIiIAIiIAIiIAIiIAK+SEDCii/OqmISAREQAREQAREQAREQAREQAREQARHwCgEJK17BrE5EQAREQAREQAREQAREQAREQAREQAR8kYCEFV+cVcUkAiIgAiIgAiIgAiIgAiIgAiIgAiLgFQISVryCWZ2IgAiIgAiIgAiIgAiIgAiIgAiIgAj4IgEJK744q4pJBERABERABERABERABERABERABETAKwQkrHgFszoRAREQAREQAREQAREQAREQAREQARHwRQISVnxxVhWTCIiACIiACIiACIiACIiACIiACIiAVwhIWPEKZnUiAiIgAiIgAiIgAiIgAiIgAiIgAiLgiwQkrPjirComERABERABERABERABERABERABERABrxCQsOIVzOpEBERABERABERABERABERABERABETAFwlIWPHFWVVMIiACIiACIiACIiACIiACIiACIiACXiEgYcUrmNWJCIiACIiACIiACIiACIiACIiACIiALxKQsOKLs6qYREAEREAEREAEREAEREAEREAEREAEvEJAwopXMKsTERABERABERABERABERABERABERABXyQgYcUXZ1UxiYAIiIAIiIAIiIAIiIAIiIAIiIAIeIWAhBWvYFYnIiACIiACIiACIiACIiACIiACIiACvkhAwoovzqpiEgEREAEREAEREAEREAEREAEREAER8AqB/wfdoyJmx6phIAAAAABJRU5ErkJggg==" alt="" data-mce-src="-" data-mind-json="{&quot;data&quot;:{&quot;text&quot;:&quot;@SpringBootApplication&quot;,&quot;expandState&quot;:&quot;expand&quot;},&quot;children&quot;:[{&quot;data&quot;:{&quot;text&quot;:&quot;@SpringBootConfiguration&quot;,&quot;expandState&quot;:&quot;expand&quot;},&quot;children&quot;:[{&quot;data&quot;:{&quot;text&quot;:&quot;@Configuration&quot;}}]},{&quot;data&quot;:{&quot;text&quot;:&quot;@EnableAutoConfiguration&quot;,&quot;layout_mind_offset&quot;:{&quot;x&quot;:358,&quot;y&quot;:72},&quot;expandState&quot;:&quot;expand&quot;},&quot;children&quot;:[{&quot;data&quot;:{&quot;text&quot;:&quot;@EnableAutoConfiguration&quot;,&quot;expandState&quot;:&quot;expand&quot;},&quot;children&quot;:[{&quot;data&quot;:{&quot;text&quot;:&quot;@AutoConfigurationImportSelector&quot;,&quot;progress&quot;:null,&quot;color&quot;:&quot;#e75d66&quot;}},{&quot;data&quot;:{&quot;text&quot;:&quot;AutoConfigurationPackage&quot;}}]}]},{&quot;data&quot;:{&quot;text&quot;:&quot;@ComponentScan&quot;,&quot;layout_mind_offset&quot;:{&quot;x&quot;:357,&quot;y&quot;:-88}}}],&quot;template&quot;:&quot;default&quot;,&quot;theme&quot;:&quot;fresh-soil&quot;,&quot;version&quot;:&quot;1.3.5&quot;}"></span></strong></span></p><p><span style="color: #ff0000;" data-mce-style="color: #ff0000;"><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong>那我们仔细分析</strong></span></span></p><p><span style="color: #ff0000;" data-mce-style="color: #ff0000;"><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong>org.springframework.boot.autoconfigure.AutoConfigurationImportSelector#selectImports</strong></span></span></p><pre id="leanote_ace_1553781156799_0" class="ace-tomorrow">public&nbsp;class&nbsp;AutoConfigurationImportSelector
+		implements&nbsp;DeferredImportSelector,&nbsp;BeanClassLoaderAware,&nbsp;ResourceLoaderAware,
+		BeanFactoryAware,&nbsp;EnvironmentAware,&nbsp;Ordered&nbsp;{
+
+
+	@Override
+	public&nbsp;String[]&nbsp;selectImports(AnnotationMetadata&nbsp;annotationMetadata)&nbsp;{
+		if&nbsp;(!isEnabled(annotationMetadata))&nbsp;{
+			return&nbsp;NO_IMPORTS;
+		}
+		AutoConfigurationMetadata&nbsp;autoConfigurationMetadata&nbsp;=&nbsp;AutoConfigurationMetadataLoader
+				.loadMetadata(this.beanClassLoader);
+		AnnotationAttributes&nbsp;attributes&nbsp;=&nbsp;getAttributes(annotationMetadata);
+		//去mata-info/spring.factories文件中&nbsp;查询&nbsp;EnableAutoConfiguration对于值
+		List&lt;String&gt;&nbsp;configurations&nbsp;=&nbsp;getCandidateConfigurations(annotationMetadata,
+				attributes);
+		//去除重复的配置类，若我们自己写的starter&nbsp;可能存主重复的
+		configurations&nbsp;=&nbsp;removeDuplicates(configurations);
+		Set&lt;String&gt;&nbsp;exclusions&nbsp;=&nbsp;getExclusions(annotationMetadata,&nbsp;attributes);
+		checkExcludedClasses(configurations,&nbsp;exclusions);
+		configurations.removeAll(exclusions);
+		//根据maven&nbsp;导入的启动器过滤出&nbsp;需要导入的配置类
+		configurations&nbsp;=&nbsp;filter(configurations,&nbsp;autoConfigurationMetadata);
+		fireAutoConfigurationImportEvents(configurations,&nbsp;exclusions);
+		return&nbsp;StringUtils.toStringArray(configurations);
+	}
+}	
+&nbsp;
+&nbsp;//去spring.factories&nbsp;中去查询EnableAutoConfirution类
+&nbsp;private&nbsp;static&nbsp;Map&lt;String,&nbsp;List&lt;String&gt;&gt;&nbsp;loadSpringFactories(@Nullable&nbsp;ClassLoader&nbsp;classLoader)&nbsp;{
+		MultiValueMap&lt;String,&nbsp;String&gt;&nbsp;result&nbsp;=&nbsp;cache.get(classLoader);
+		if&nbsp;(result&nbsp;!=&nbsp;null)&nbsp;{
+			return&nbsp;result;
+		}
+
+		try&nbsp;{
+			Enumeration&lt;URL&gt;&nbsp;urls&nbsp;=&nbsp;(classLoader&nbsp;!=&nbsp;null&nbsp;?
+					classLoader.getResources(FACTORIES_RESOURCE_LOCATION)&nbsp;:
+					ClassLoader.getSystemResources(FACTORIES_RESOURCE_LOCATION));
+			result&nbsp;=&nbsp;new&nbsp;LinkedMultiValueMap&lt;&gt;();
+			while&nbsp;(urls.hasMoreElements())&nbsp;{
+				URL&nbsp;url&nbsp;=&nbsp;urls.nextElement();
+				UrlResource&nbsp;resource&nbsp;=&nbsp;new&nbsp;UrlResource(url);
+				Properties&nbsp;properties&nbsp;=&nbsp;PropertiesLoaderUtils.loadProperties(resource);
+				for&nbsp;(Map.Entry&lt;?,&nbsp;?&gt;&nbsp;entry&nbsp;:&nbsp;properties.entrySet())&nbsp;{
+					List&lt;String&gt;&nbsp;factoryClassNames&nbsp;=&nbsp;Arrays.asList(
+							StringUtils.commaDelimitedListToStringArray((String)&nbsp;entry.getValue()));
+					result.addAll((String)&nbsp;entry.getKey(),&nbsp;factoryClassNames);
+				}
+			}
+			cache.put(classLoader,&nbsp;result);
+			return&nbsp;result;
+		}
+		catch&nbsp;(IOException&nbsp;ex)&nbsp;{
+			throw&nbsp;new&nbsp;IllegalArgumentException("Unable&nbsp;to&nbsp;load&nbsp;factories&nbsp;from&nbsp;location&nbsp;["&nbsp;+
+					FACTORIES_RESOURCE_LOCATION&nbsp;+&nbsp;"]",&nbsp;ex);
+		}
+	}</pre><p><span style="font-size: 18pt;" data-mce-style="font-size: 18pt;"><strong><span style="color: #ff0000;" data-mce-style="color: #ff0000;"><img src="springboot自动装配原理详解_files/5c9cd944234993087a00000c.png" alt="" data-mce-src="springboot自动装配原理详解_files/5c9cd944234993087a00000c.png"></span></strong></span></p><p><span style="color: #ff0000;" data-mce-style="color: #ff0000;"><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong>然后我们分析RedisAutoConfiguration类</strong></span></span></p><p><span style="color: #ff0000;" data-mce-style="color: #ff0000;"><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong>&nbsp; &nbsp; &nbsp;导入了三个组件 &nbsp;RedisTemplate &nbsp;&nbsp;StringRedisTemplate</strong></span></span></p><p><span style="color: #ff0000;" data-mce-style="color: #ff0000;"><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong>&nbsp; &nbsp; &nbsp;JedisConnectionConfiguration&nbsp;</strong></span></span></p><pre id="leanote_ace_1553783175318_0" class="ace-tomorrow">@Configuration
+@ConditionalOnClass(RedisOperations.class)
+@EnableConfigurationProperties(RedisProperties.class)
+@Import({&nbsp;LettuceConnectionConfiguration.class,&nbsp;JedisConnectionConfiguration.class&nbsp;})
+public&nbsp;class&nbsp;RedisAutoConfiguration&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//导入redisTemplate&nbsp;
+	@Bean
+	@ConditionalOnMissingBean(name&nbsp;=&nbsp;"redisTemplate")
+	public&nbsp;RedisTemplate&lt;Object,&nbsp;Object&gt;&nbsp;redisTemplate(
+			RedisConnectionFactory&nbsp;redisConnectionFactory)&nbsp;throws&nbsp;UnknownHostException&nbsp;{
+		RedisTemplate&lt;Object,&nbsp;Object&gt;&nbsp;template&nbsp;=&nbsp;new&nbsp;RedisTemplate&lt;&gt;();
+		template.setConnectionFactory(redisConnectionFactory);
+		return&nbsp;template;
+	}
+
+	@Bean
+	@ConditionalOnMissingBean
+	public&nbsp;StringRedisTemplate&nbsp;stringRedisTemplate(
+			RedisConnectionFactory&nbsp;redisConnectionFactory)&nbsp;throws&nbsp;UnknownHostException&nbsp;{
+		StringRedisTemplate&nbsp;template&nbsp;=&nbsp;new&nbsp;StringRedisTemplate();
+		template.setConnectionFactory(redisConnectionFactory);
+		return&nbsp;template;
+	}
+
+}
+
+=====================================JedisConnectionConfiguration==========================================
+
+@Configuration
+@ConditionalOnClass({&nbsp;GenericObjectPool.class,&nbsp;JedisConnection.class,&nbsp;Jedis.class&nbsp;})
+class&nbsp;JedisConnectionConfiguration&nbsp;extends&nbsp;RedisConnectionConfiguration&nbsp;{
+
+	private&nbsp;final&nbsp;RedisProperties&nbsp;properties;
+
+	private&nbsp;final&nbsp;List&lt;JedisClientConfigurationBuilderCustomizer&gt;&nbsp;builderCustomizers;
+
+	JedisConnectionConfiguration(RedisProperties&nbsp;properties,
+			ObjectProvider&lt;RedisSentinelConfiguration&gt;&nbsp;sentinelConfiguration,
+			ObjectProvider&lt;RedisClusterConfiguration&gt;&nbsp;clusterConfiguration,
+			ObjectProvider&lt;List&lt;JedisClientConfigurationBuilderCustomizer&gt;&gt;&nbsp;builderCustomizers)&nbsp;{
+		super(properties,&nbsp;sentinelConfiguration,&nbsp;clusterConfiguration);
+		this.properties&nbsp;=&nbsp;properties;
+		this.builderCustomizers&nbsp;=&nbsp;builderCustomizers
+				.getIfAvailable(Collections::emptyList);
+	}
+
+	@Bean
+	@ConditionalOnMissingBean(RedisConnectionFactory.class)
+	public&nbsp;JedisConnectionFactory&nbsp;redisConnectionFactory()&nbsp;throws&nbsp;UnknownHostException&nbsp;{
+		return&nbsp;createJedisConnectionFactory();
+	}
+
+	private&nbsp;JedisConnectionFactory&nbsp;createJedisConnectionFactory()&nbsp;{
+		JedisClientConfiguration&nbsp;clientConfiguration&nbsp;=&nbsp;getJedisClientConfiguration();
+		if&nbsp;(getSentinelConfig()&nbsp;!=&nbsp;null)&nbsp;{
+			return&nbsp;new&nbsp;JedisConnectionFactory(getSentinelConfig(),&nbsp;clientConfiguration);
+		}
+		if&nbsp;(getClusterConfiguration()&nbsp;!=&nbsp;null)&nbsp;{
+			return&nbsp;new&nbsp;JedisConnectionFactory(getClusterConfiguration(),
+					clientConfiguration);
+		}
+		return&nbsp;new&nbsp;JedisConnectionFactory(getStandaloneConfig(),&nbsp;clientConfiguration);
+	}
+
+	private&nbsp;JedisClientConfiguration&nbsp;getJedisClientConfiguration()&nbsp;{
+		JedisClientConfigurationBuilder&nbsp;builder&nbsp;=&nbsp;applyProperties(
+				JedisClientConfiguration.builder());
+		RedisProperties.Pool&nbsp;pool&nbsp;=&nbsp;this.properties.getJedis().getPool();
+		if&nbsp;(pool&nbsp;!=&nbsp;null)&nbsp;{
+			applyPooling(pool,&nbsp;builder);
+		}
+		if&nbsp;(StringUtils.hasText(this.properties.getUrl()))&nbsp;{
+			customizeConfigurationFromUrl(builder);
+		}
+		customize(builder);
+		return&nbsp;builder.build();
+	}
+
+	private&nbsp;JedisClientConfigurationBuilder&nbsp;applyProperties(
+			JedisClientConfigurationBuilder&nbsp;builder)&nbsp;{
+		if&nbsp;(this.properties.isSsl())&nbsp;{
+			builder.useSsl();
+		}
+		if&nbsp;(this.properties.getTimeout()&nbsp;!=&nbsp;null)&nbsp;{
+			Duration&nbsp;timeout&nbsp;=&nbsp;this.properties.getTimeout();
+			builder.readTimeout(timeout).connectTimeout(timeout);
+		}
+		return&nbsp;builder;
+	}
+
+	private&nbsp;void&nbsp;applyPooling(RedisProperties.Pool&nbsp;pool,
+			JedisClientConfiguration.JedisClientConfigurationBuilder&nbsp;builder)&nbsp;{
+		builder.usePooling().poolConfig(jedisPoolConfig(pool));
+	}
+
+	private&nbsp;JedisPoolConfig&nbsp;jedisPoolConfig(RedisProperties.Pool&nbsp;pool)&nbsp;{
+		JedisPoolConfig&nbsp;config&nbsp;=&nbsp;new&nbsp;JedisPoolConfig();
+		config.setMaxTotal(pool.getMaxActive());
+		config.setMaxIdle(pool.getMaxIdle());
+		config.setMinIdle(pool.getMinIdle());
+		if&nbsp;(pool.getMaxWait()&nbsp;!=&nbsp;null)&nbsp;{
+			config.setMaxWaitMillis(pool.getMaxWait().toMillis());
+		}
+		return&nbsp;config;
+	}
+}	</pre><p>&nbsp;<br></p><p>&nbsp;<br></p><p>&nbsp;<br></p><p>&nbsp;<br></p><p>&nbsp;<br></p><p>&nbsp;<br></p><p>&nbsp;<br></p><p><br></p></div>
+	</div>
+
+<!-- 该js供其它处理 -->
+<script src="../leanote-html.js"></script>
+</body>
+</html>

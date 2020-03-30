@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demomybaits.mapper.CourseMapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.example.demomybaits.entity.CourseEntity" id="courseMap">
+        <result property="id" column="id"/>
+        <result property="org" column="org"/>
+        <result property="name" column="name"/>
+        <result property="url" column="url"/>
+        <result property="code" column="code"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="createTime" column="create_time"/>
+        <result property="typeId" column="type_id"/>
+    </resultMap>
+
+    <select id="list"  resultType="com.example.demomybaits.entity.CourseEntity">
+        SELECT
+            *
+        FROM
+            course
+    </select>
+
+</mapper>

@@ -1,0 +1,11 @@
+
+spring:
+  rabbitmq:
+    host: 192.168.157.11
+    port: 5672
+#    virtual-host: tulingvip-springboot-rabbitmq
+    username: user
+    password: password
+    connection-timeout: 5000
+    template:
+      mandatory: true

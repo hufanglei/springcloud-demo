@@ -1,0 +1,1051 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-autoconfigure/2.2.5.RELEASE/spring-boot-autoconfigure-2.2.5.RELEASE-sources.jar!/org/springframework/boot/autoconfigure/AutoConfigurationImportSelector.java" line="91" />
+    <bookmark url="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-autoconfigure/2.2.5.RELEASE/spring-boot-autoconfigure-2.2.5.RELEASE-sources.jar!/org/springframework/boot/autoconfigure/AutoConfigurationImportSelector.java" line="71" />
+    <bookmark url="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-autoconfigure/2.2.5.RELEASE/spring-boot-autoconfigure-2.2.5.RELEASE-sources.jar!/org/springframework/boot/autoconfigure/AutoConfigurationImportSelector.java" line="115" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="14620116-7204-460d-a220-feca784991f8" name="Default Changelist" comment="" />
+    <ignored path="$PROJECT_DIR$/out/" />
+    <ignored path="$PROJECT_DIR$/demo1/target/" />
+    <ignored path="$PROJECT_DIR$/demo2/target/" />
+    <ignored path="$PROJECT_DIR$/demo-jdbc/target/" />
+    <ignored path="$PROJECT_DIR$/demo-swagger2/target/" />
+    <ignored path="$PROJECT_DIR$/demo-mybaits/target/" />
+    <ignored path="$PROJECT_DIR$/demo-rabbitmq/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="isMigrated" value="true" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/demo-rabbitmq/src/main/java/com/example/demorabbitmq/RabbitMqConfig.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="209">
+              <caret line="13" selection-start-line="13" selection-end-line="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/demo1/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-399" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/demo1/src/main/java/com/springboot/demo1/Demo1Application.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="152">
+              <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/demo1/src/main/java/com/springboot/demo1/TulingController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="190">
+              <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/demo1/src/main/resources/application.properties">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/demo1/src/main/resources/application.yml">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/demo1/src/main/resources/static/index.html">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/demo-redis/doc/springboot自动装配流程图.png">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/demo-redis/doc/springboot自动装配原理详解.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="304">
+              <caret line="16" column="16" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/demo-rabbitmq/src/main/java/com/example/demorabbitmq/controller/TestController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="532">
+              <caret line="34" column="7" selection-start-line="34" selection-start-column="7" selection-end-line="34" selection-end-column="7" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="spring-beans.schema" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>getResource</find>
+      <find>base</find>
+      <find>error</find>
+      <find>pring-boot-dependencies</find>
+      <find>toString</find>
+      <find>ResourceHttpRequestHandler</find>
+      <find>WebJarsResourceResolver</find>
+      <find>webjar</find>
+      <find>getConfigurations</find>
+      <find>AutoConfigurationEntry</find>
+      <find>AutoConfigurationImportSelector</find>
+      <find>redis</find>
+      <find>DATAS</find>
+    </findStrings>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/demo2/src/main/java/com/example/demo2/test/Demo2Application.java" />
+        <option value="$PROJECT_DIR$/demo1/src/main/resources/application.properties" />
+        <option value="$PROJECT_DIR$/demo1/src/main/java/com/springboot/demo1/Demo1Application.java" />
+        <option value="$PROJECT_DIR$/demo-redis/src/main/java/com/example/demo2/test/Demo2Application.java" />
+        <option value="$PROJECT_DIR$/demo-jdbc/src/test/java/com/springboot2/demojdbc/Test.java" />
+        <option value="$PROJECT_DIR$/demo-jdbc/src/main/java/com/springboot2/demojdbc/DruidMonitorConfig.java" />
+        <option value="$PROJECT_DIR$/demo-jdbc/src/main/java/com/springboot2/demojdbc/mapper/EmployeeMapper.java" />
+        <option value="$PROJECT_DIR$/demo-swagger2/src/main/resources/application.properties" />
+        <option value="$PROJECT_DIR$/demo-swagger2/pom.xml" />
+        <option value="$PROJECT_DIR$/demo-swagger2/src/main/java/com/example/demoswagger2/com/tuling/controller/User.java" />
+        <option value="$PROJECT_DIR$/demo-swagger2/src/main/java/com/example/demoswagger2/com/tuling/controller/UserController.java" />
+        <option value="$PROJECT_DIR$/demo-swagger2/src/main/java/com/example/demoswagger2/Swagger2Config.java" />
+        <option value="$PROJECT_DIR$/demo-swagger2/src/main/java/com/example/demoswagger2/DemoSwagger2Application.java" />
+        <option value="$PROJECT_DIR$/demo-swagger2/src/main/java/controller/Swagger2Config.java" />
+        <option value="$PROJECT_DIR$/demo-swagger2/src/main/java/com/Swagger2Config.java" />
+        <option value="$PROJECT_DIR$/demo-jdbc/src/test/java/com/springboot2/demojdbc/DemoJdbcApplicationTests.java" />
+        <option value="$PROJECT_DIR$/demo-jdbc/src/main/java/com/springboot2/demojdbc/DruidDataSourceProperties.java" />
+        <option value="$PROJECT_DIR$/demo-jdbc/src/main/java/com/springboot2/demojdbc/DemoJdbcApplication.java" />
+        <option value="$PROJECT_DIR$/demo-jdbc/src/main/java/com/springboot2/demojdbc/Test.java" />
+        <option value="$PROJECT_DIR$/demo-jdbc/src/main/java/com/springboot2/demojdbc/UserController.java" />
+        <option value="$PROJECT_DIR$/demo-jdbc/src/main/java/com/springboot2/demojdbc/DruidDataSourceConfig.java" />
+        <option value="$PROJECT_DIR$/demo-jdbc/src/main/java/com/springboot2/demojdbc/controller/UserController.java" />
+        <option value="$PROJECT_DIR$/demo-jdbc/pom.xml" />
+        <option value="$PROJECT_DIR$/demo-jdbc/src/main/java/com/springboot2/demojdbc/service/Test.java" />
+        <option value="$PROJECT_DIR$/demo-jdbc/src/main/resources/application.properties" />
+        <option value="$PROJECT_DIR$/demo-jdbc/src/main/java/com/springboot2/demojdbc/config/DruidDataSourceProperties.java" />
+        <option value="$PROJECT_DIR$/demo-jdbc/src/main/java/com/springboot2/demojdbc/service/UserService.java" />
+        <option value="$PROJECT_DIR$/demo-jdbc/src/main/java/com/springboot2/demojdbc/config/DruidDataSourceConfig.java" />
+        <option value="$PROJECT_DIR$/demo-jdbc/src/main/resources/application.yml" />
+        <option value="$PROJECT_DIR$/demo-mybaits/src/main/java/com/example/demomybaits/entity/Type.java" />
+        <option value="$PROJECT_DIR$/demo-mybaits/src/main/java/com/example/demomybaits/entity/CourseEntity.java" />
+        <option value="$PROJECT_DIR$/demo-mybaits/src/main/resources/mapper/sys/CourseDao.xml" />
+        <option value="$PROJECT_DIR$/demo-mybaits/src/main/java/com/example/demomybaits/mapper/courseMapper.java" />
+        <option value="$PROJECT_DIR$/demo-mybaits/src/main/java/com/example/demomybaits/config/DruidDataSourceProperties.java" />
+        <option value="$PROJECT_DIR$/demo-mybaits/pom.xml" />
+        <option value="$PROJECT_DIR$/demo-mybaits/src/main/java/com/example/demomybaits/mapper/EmployeeMapper.java" />
+        <option value="$PROJECT_DIR$/demo-mybaits/src/main/java/com/example/demomybaits/controller/TestController.java" />
+        <option value="$PROJECT_DIR$/demo-mybaits/src/main/resources/mapper/sys/CourseMapper.xml" />
+        <option value="$PROJECT_DIR$/demo-mybaits/src/main/resources/mapper/mapper/CourseMapper.xml" />
+        <option value="$PROJECT_DIR$/demo-mybaits/src/main/resources/application.yml" />
+        <option value="$PROJECT_DIR$/demo-mybaits/src/main/resources/mapper/mybatis/CourseMapper.xml" />
+        <option value="$PROJECT_DIR$/demo-rabbitmq/src/main/java/com/example/demorabbitmq/DemoRabbitmqApplication.java" />
+        <option value="$PROJECT_DIR$/demo-rabbitmq/src/main/java/com/example/demorabbitmq/onetoone/RabbitMqConfig.java" />
+        <option value="$PROJECT_DIR$/demo-rabbitmq/pom.xml" />
+        <option value="$PROJECT_DIR$/demo-rabbitmq/src/main/java/com/example/demorabbitmq/onetoone/MyReceiver2.java" />
+        <option value="$PROJECT_DIR$/demo-rabbitmq/src/main/java/com/example/demorabbitmq/onetoone/MyReceiver1.java" />
+        <option value="$PROJECT_DIR$/demo-rabbitmq/src/main/resources/application.yml" />
+        <option value="$PROJECT_DIR$/demo-rabbitmq/src/main/java/com/example/demorabbitmq/oToMany/MyReceiver2.java" />
+        <option value="$PROJECT_DIR$/demo-rabbitmq/src/main/java/com/example/demorabbitmq/oToMany/MyReceiver1.java" />
+        <option value="$PROJECT_DIR$/demo-rabbitmq/src/main/java/com/example/demorabbitmq/controller/TestController.java" />
+        <option value="$PROJECT_DIR$/demo-rabbitmq/src/main/java/com/example/demorabbitmq/oToMany/MyReceiver11.java" />
+      </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="D:\soft\apache-maven-3.3.9\maven_home" />
+        <option name="mavenHome" value="D:/soft/apache-maven-3.3.9" />
+        <option name="userSettingsFile" value="D:\soft\apache-maven-3.3.9\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="vmOptionsForImporter" value="-Xmx768m" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand />
+      <select />
+    </treeState>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="240" />
+    <option name="y" value="128" />
+    <option name="width" value="1440" />
+    <option name="height" value="773" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="springboot-tuling-study" type="b2602c69:ProjectViewProjectNode" />
+              <item name="springboot-tuling-study" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/demo-mybaits/doc" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.23269516" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.example.demorabbitmq" />
+      <recent name="com" />
+      <recent name="" />
+      <recent name="com.springboot2.demojdbc" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.demo2.test.condition" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\workspace\springboot2\springboot-tuling-study\demo-mybaits\doc" />
+      <recent name="E:\workspace\springboot2\springboot-tuling-study\demo-mybaits\src\main\java\com\example\demomybaits" />
+      <recent name="E:\workspace\springboot2\springboot-tuling-study\demo-mybaits\src\main\java\com\example\demomybaits\entity" />
+      <recent name="E:\workspace\springboot2\springboot-tuling-study\demo-mybaits\src\main\resources" />
+      <recent name="E:\workspace\springboot2\springboot-tuling-study\demo-jdbc\src\main\resources" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.DemoRabbitmqApplication">
+    <configuration name="Demo2Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="com.example.demo2.test.Demo2Application" />
+      <module name="demo-redis" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.demo2.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DemoJdbcApplicationTests.testDbType" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="demo-jdbc" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.springboot2.demojdbc.config.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.springboot2.demojdbc" />
+      <option name="MAIN_CLASS_NAME" value="com.springboot2.demojdbc.DemoJdbcApplicationTests" />
+      <option name="METHOD_NAME" value="testDbType" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DemoJdbcApplicationTests.testJdbcTemplate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="demo-jdbc" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.springboot2.demojdbc.config.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.springboot2.demojdbc" />
+      <option name="MAIN_CLASS_NAME" value="com.springboot2.demojdbc.DemoJdbcApplicationTests" />
+      <option name="METHOD_NAME" value="testJdbcTemplate" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Demo1Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="demo1" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.springboot.demo1.Demo1Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Demo2Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="demo-redis" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.demo2.test.Demo2Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DemoJdbcApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="demo-jdbc" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.springboot2.demojdbc.DemoJdbcApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DemoMybaitsApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="demo-mybaits" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.demomybaits.DemoMybaitsApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DemoRabbitmqApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="demo-rabbitmq" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.demorabbitmq.DemoRabbitmqApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DemoSwagger2Application (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="demo-swagger2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.DemoSwagger2Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DemoSwagger2Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="demo-swagger2" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="controller.DemoSwagger2Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Demo2Application" />
+      <item itemvalue="JUnit.DemoJdbcApplicationTests.testDbType" />
+      <item itemvalue="JUnit.DemoJdbcApplicationTests.testJdbcTemplate" />
+      <item itemvalue="Spring Boot.Demo1Application" />
+      <item itemvalue="Spring Boot.Demo2Application" />
+      <item itemvalue="Spring Boot.DemoJdbcApplication" />
+      <item itemvalue="Spring Boot.DemoSwagger2Application" />
+      <item itemvalue="Spring Boot.DemoMybaitsApplication" />
+      <item itemvalue="Spring Boot.DemoRabbitmqApplication" />
+      <item itemvalue="Spring Boot.DemoSwagger2Application (1)" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.DemoJdbcApplicationTests.testJdbcTemplate" />
+        <item itemvalue="JUnit.DemoJdbcApplicationTests.testDbType" />
+        <item itemvalue="Spring Boot.DemoSwagger2Application (1)" />
+        <item itemvalue="Application.Demo2Application" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpringBootOptions">
+    <option name="showAdditionalConfigNotification" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="14620116-7204-460d-a220-feca784991f8" name="Default Changelist" comment="" />
+      <created>1585190755584</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1585190755584</updated>
+      <workItem from="1585190757828" duration="3347000" />
+      <workItem from="1585197705481" duration="9854000" />
+      <workItem from="1585268916499" duration="11456000" />
+      <workItem from="1585534176127" duration="18837000" />
+      <workItem from="1585566025658" duration="249000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="DemoJdbcApplicationTests_testJdbcTemplate - 2020.03.30 at 10h 55m 54s.xml">
+      <configuration name="DemoJdbcApplicationTests.testJdbcTemplate" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DemoJdbcApplicationTests_testJdbcTemplate - 2020.03.30 at 10h 57m 16s.xml">
+      <configuration name="DemoJdbcApplicationTests.testJdbcTemplate" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DemoJdbcApplicationTests_testJdbcTemplate - 2020.03.30 at 10h 57m 35s.xml">
+      <configuration name="DemoJdbcApplicationTests.testJdbcTemplate" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DemoJdbcApplicationTests_testDbType - 2020.03.30 at 13h 01m 51s.xml">
+      <configuration name="DemoJdbcApplicationTests.testDbType" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DemoJdbcApplicationTests_testJdbcTemplate - 2020.03.30 at 13h 02m 14s.xml">
+      <configuration name="DemoJdbcApplicationTests.testJdbcTemplate" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DemoJdbcApplicationTests_testJdbcTemplate - 2020.03.30 at 13h 03m 43s.xml">
+      <configuration name="DemoJdbcApplicationTests.testJdbcTemplate" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DemoJdbcApplicationTests_testJdbcTemplate - 2020.03.30 at 13h 05m 27s.xml">
+      <configuration name="DemoJdbcApplicationTests.testJdbcTemplate" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DemoJdbcApplicationTests_testJdbcTemplate - 2020.03.30 at 13h 09m 19s.xml">
+      <configuration name="DemoJdbcApplicationTests.testJdbcTemplate" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DemoJdbcApplicationTests_testJdbcTemplate - 2020.03.30 at 13h 10m 15s.xml">
+      <configuration name="DemoJdbcApplicationTests.testJdbcTemplate" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DemoJdbcApplicationTests_testJdbcTemplate - 2020.03.30 at 13h 11m 08s.xml">
+      <configuration name="DemoJdbcApplicationTests.testJdbcTemplate" configurationId="JUnit" />
+    </history-entry>
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="43743000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6363636" visible="true" weight="0.20040214" />
+      <window_info id="Structure" order="1" sideWeight="0.36363637" side_tool="true" weight="0.28384614" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info id="UI Designer" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info id="Web" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.329429" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.5036603" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.49926794" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.329429" />
+      <window_info anchor="bottom" id="Spring" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.329429" />
+      <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Java Enterprise" order="11" />
+      <window_info anchor="bottom" id="Database Changes" order="12" />
+      <window_info anchor="bottom" id="Version Control" order="13" />
+      <window_info anchor="bottom" id="Flutter Performance" order="14" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="15" weight="0.329429" />
+      <window_info anchor="bottom" id="MyBatis Log" order="16" />
+      <window_info anchor="bottom" id="Tail" order="17" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Maven" order="3" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" id="Capture Analysis" order="5" />
+      <window_info anchor="right" id="Flutter Inspector" order="6" />
+      <window_info anchor="right" id="Word Book" order="7" side_tool="true" />
+      <window_info anchor="right" id="Database" order="8" />
+      <window_info anchor="right" id="Flutter Outline" order="9" />
+      <window_info anchor="right" id="Palette&#9;" order="10" />
+      <window_info anchor="right" id="Theme Preview" order="11" />
+      <window_info anchor="right" id="RestServices" order="12" />
+      <window_info anchor="right" id="Bean Validation" order="13" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/demo-redis/src/main/java/com/example/demo2/test/ioc/TulingImportBeanDefinitionRegistrar.java</url>
+          <line>11</line>
+          <properties />
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-autoconfigure/2.2.5.RELEASE/spring-boot-autoconfigure-2.2.5.RELEASE-sources.jar!/org/springframework/boot/autoconfigure/AutoConfigurationImportSelector.java</url>
+          <line>95</line>
+          <properties />
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-autoconfigure/2.2.5.RELEASE/spring-boot-autoconfigure-2.2.5.RELEASE-sources.jar!/org/springframework/boot/autoconfigure/AutoConfigurationImportSelector.java</url>
+          <line>170</line>
+          <properties />
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-autoconfigure/2.2.5.RELEASE/spring-boot-autoconfigure-2.2.5.RELEASE.jar!/org/springframework/boot/autoconfigure/AutoConfigurationImportSelector.class</url>
+          <line>72</line>
+          <properties />
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>jar://$MAVEN_REPOSITORY$/org/springframework/spring-core/5.2.4.RELEASE/spring-core-5.2.4.RELEASE-sources.jar!/org/springframework/core/io/support/SpringFactoriesLoader.java</url>
+          <line>92</line>
+          <properties />
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/demo-jdbc/src/main/java/com/springboot2/demojdbc/config/DruidDataSourceConfig.java</url>
+          <line>26</line>
+          <properties />
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/demo-rabbitmq/src/main/java/com/example/demorabbitmq/controller/TestController.java</url>
+          <line>24</line>
+          <properties />
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+      </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="java-exception">
+          <dependency leave-enabled="true" master-id="0" />
+          <properties />
+        </breakpoint>
+        <breakpoint enabled="true" type="dart-exception">
+          <dependency id="0" />
+          <properties />
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/mybatis/mybatis-spring/2.0.0/mybatis-spring-2.0.0.jar!/org/mybatis/spring/MyBatisSystemException.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/mybatis/mybatis-spring/2.0.0/mybatis-spring-2.0.0.jar!/org/mybatis/spring/SqlSessionFactoryBean.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="43" column="13" selection-start-line="43" selection-start-column="13" selection-end-line="43" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/mybatis/mybatis-spring/2.0.0/mybatis-spring-2.0.0.jar!/org/mybatis/spring/SqlSessionHolder.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="13" column="19" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/mybatis/mybatis-spring/2.0.0/mybatis-spring-2.0.0.jar!/org/mybatis/spring/SqlSessionTemplate.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/mybatis/mybatis-spring/2.0.0/mybatis-spring-2.0.0.jar!/org/mybatis/spring/SqlSessionUtils.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="22" column="19" selection-start-line="22" selection-start-column="19" selection-end-line="22" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/mybatis/mybatis-spring/2.0.0/mybatis-spring-2.0.0.jar!/org/mybatis/spring/mapper/ClassPathMapperScanner.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/mybatis/mybatis-spring/2.0.0/mybatis-spring-2.0.0.jar!/org/mybatis/spring/mapper/MapperFactoryBean.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/mybatis/mybatis-spring/2.0.0/mybatis-spring-2.0.0.jar!/org/mybatis/spring/mapper/MapperScannerConfigurer.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/mybatis/mybatis-spring/2.0.0/mybatis-spring-2.0.0.jar!/org/mybatis/spring/config/MapperScannerBeanDefinitionParser.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/mybatis/mybatis-spring/2.0.0/mybatis-spring-2.0.0.jar!/org/mybatis/spring/config/mybatis-spring.xsd">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/mybatis/mybatis-spring/2.0.0/mybatis-spring-2.0.0.jar!/org/mybatis/spring/config/NamespaceHandler.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/mybatis/mybatis-spring/2.0.0/mybatis-spring-2.0.0.jar!/org/mybatis/spring/annotation/MapperScan.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="23" column="18" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/mybatis/mybatis-spring/2.0.0/mybatis-spring-2.0.0.jar!/org/mybatis/spring/annotation/MapperScannerRegistrar.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/mybatis/mybatis-spring/2.0.0/mybatis-spring-2.0.0.jar!/org/mybatis/spring/annotation/MapperScans.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/mybatis/spring/boot/mybatis-spring-boot-autoconfigure/2.0.0/mybatis-spring-boot-autoconfigure-2.0.0.jar!/org/mybatis/spring/boot/autoconfigure/ConfigurationCustomizer.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+          <folding>
+            <element signature="e#0#309#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/mybatis/spring/boot/mybatis-spring-boot-autoconfigure/2.0.0/mybatis-spring-boot-autoconfigure-2.0.0.jar!/org/mybatis/spring/boot/autoconfigure/MybatisAutoConfiguration.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="51" column="67" lean-forward="true" selection-start-line="51" selection-start-column="67" selection-end-line="51" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo-mybaits/src/main/java/com/example/demomybaits/entity/Type.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo-jdbc/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="47" column="21" selection-start-line="38" selection-start-column="6" selection-end-line="47" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo-mybaits/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="42" column="43" selection-start-line="42" selection-start-column="43" selection-end-line="42" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo-jdbc/src/main/resources/application.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="22" selection-end-column="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo-mybaits/src/main/java/com/example/demomybaits/config/DruidDataSourceProperties.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="40" selection-start-line="5" selection-start-column="40" selection-end-line="5" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo-mybaits/src/main/java/com/example/demomybaits/mapper/EmployeeMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="14" column="9" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo-mybaits/src/main/java/com/example/demomybaits/DemoMybaitsApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="12" column="1" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo-mybaits/src/main/java/com/example/demomybaits/config/DruidDataSourceConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-374">
+          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo-mybaits/src/main/java/com/example/demomybaits/entity/CourseEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-70">
+          <caret line="18" column="23" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo-mybaits/src/main/resources/application.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="329">
+          <caret line="18" column="49" selection-start-line="18" selection-start-column="49" selection-end-line="18" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo-mybaits/src/main/resources/mapper/mybatis/CourseMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="14" column="52" lean-forward="true" selection-start-line="14" selection-start-column="52" selection-end-line="14" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo-mybaits/src/main/java/com/example/demomybaits/mapper/CourseMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="13" column="1" lean-forward="true" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo-mybaits/doc/study.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="15" column="25" lean-forward="true" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo-mybaits/src/main/java/com/example/demomybaits/controller/TestController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="386">
+          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#534#535#0" expanded="true" />
+            <element signature="e#568#569#0" expanded="true" />
+            <element signature="e#768#769#0" expanded="true" />
+            <element signature="e#810#811#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo-rabbitmq/src/test/java/com/example/demorabbitmq/DemoRabbitmqApplicationTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="12" column="1" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-autoconfigure/2.2.5.RELEASE/spring-boot-autoconfigure-2.2.5.RELEASE-sources.jar!/org/springframework/boot/autoconfigure/amqp/RabbitProperties.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4123">
+          <caret line="265" column="16" selection-start-line="265" selection-start-column="16" selection-end-line="265" selection-end-column="16" />
+          <folding>
+            <element signature="e#6955#6956#0" expanded="true" />
+            <element signature="e#7023#7024#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo-rabbitmq/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="29" selection-start-line="29" selection-end-line="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo-rabbitmq/src/main/resources/application.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="28" selection-start-line="5" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo-rabbitmq/src/main/java/com/example/demorabbitmq/onetoone/MyReceiver2.java" />
+    <entry file="jar://D:/Program Files/Java/jdk1.8.0_211/src.zip!/java/lang/String.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="2497" column="25" selection-start-line="2497" selection-start-column="25" selection-end-line="2497" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-context/5.2.4.RELEASE/spring-context-5.2.4.RELEASE-sources.jar!/org/springframework/context/annotation/ConfigurationClassParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="173" selection-start-line="173" selection-end-line="173" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo-rabbitmq/src/main/java/com/example/demorabbitmq/onetoone/MyReceiver1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="6" column="10" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo-rabbitmq/src/main/java/com/example/demorabbitmq/oToMany/MyReceiver2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="15" column="1" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo-rabbitmq/src/main/java/com/example/demorabbitmq/oToMany/MyReceiver11.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="9" column="27" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo-rabbitmq/src/main/java/com/example/demorabbitmq/DemoRabbitmqApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo-redis/doc/springboot自动装配流程图.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo-redis/doc/springboot自动装配原理详解.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="16" column="16" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo-rabbitmq/src/main/java/com/example/demorabbitmq/controller/TestController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="532">
+          <caret line="34" column="7" selection-start-line="34" selection-start-column="7" selection-end-line="34" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo-rabbitmq/src/main/java/com/example/demorabbitmq/RabbitMqConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo1/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-399" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo1/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo1/src/main/resources/application.yml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo1/src/main/resources/static/index.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo1/src/main/java/com/springboot/demo1/Demo1Application.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo1/src/main/java/com/springboot/demo1/TulingController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.23269516" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.23269516" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>demo-redis</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.23269516" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.23269516" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

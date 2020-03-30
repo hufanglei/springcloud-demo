@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="tool" content="leanote-desktop-app">
+<title>第二 节:springboot整合篇(飞机篇)</title>
+<style>
+
+*{font-family:"lucida grande","lucida sans unicode",lucida,helvetica,"Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;}
+
+body {
+  margin: 0;
+}
+
+/*公用文字样式*/
+h1{font-size:30px}h2{font-size:24px}h3{font-size:18px}h4{font-size:14px}
+.note-container{
+    width:850px; 
+    margin:auto;
+    padding: 10px 20px;
+    box-shadow: 1px 1px 10px #eee;
+}
+#title {
+  margin: 0;
+}
+table {
+    margin-bottom: 16px;
+    border-collapse: collapse;
+}
+table th, table td {
+    padding: 6px 13px;
+    border: 1px solid #ddd;
+}
+table th {
+    font-weight: bold;
+}
+
+table tr {
+    background-color: none;
+    border-top: 1px solid #ccc;
+}
+table tr:nth-child(2n) {
+    background-color: rgb(247, 247, 249);
+}
+.mce-item-table, .mce-item-table td, .mce-item-table th, .mce-item-table caption {
+  border: 1px solid #ddd;
+  border-collapse: collapse;
+  padding: 6px 13px;
+}
+blockquote {
+  border-left-width:10px;
+  background-color:rgba(128,128,128,0.05);
+  border-top-right-radius:5px;
+  border-bottom-right-radius:5px;
+  padding:15px 20px;
+  border-left:5px solid rgba(128,128,128,0.075);
+}
+blockquote p {
+  margin-bottom:1.1em;
+  font-size:1em;
+  line-height:1.45
+}
+blockquote ul:last-child,blockquote ol:last-child {
+  margin-bottom:0
+}
+pre {
+  padding: 18px;
+  background-color: #f7f7f9;
+  border: 1px solid #e1e1e8;
+  border-radius: 3px;
+  display: block;
+}
+code {
+  padding: 2px 4px;
+  font-size: 90%;
+  color: #c7254e;
+  white-space: nowrap;
+  background-color: #f9f2f4;
+  border-radius: 4px;
+}
+.footnote {
+  vertical-align: top;
+  position: relative;
+  top: -0.5em;
+  font-size: .8em;
+}
+
+hr {
+  margin:2em 0
+}
+img {
+  max-width:100%
+}
+pre {
+  word-break:break-word
+}
+p,pre,pre.prettyprint,blockquote {
+  margin:0 0 1.1em
+}
+hr {
+  margin:2em 0
+}
+img {
+  max-width:100%
+}
+.sequence-diagram,.flow-chart {
+  text-align:center;
+  margin-bottom:1.1em
+}
+.sequence-diagram text,.flow-chart text {
+  font-size:15px !important;
+  font-family:"Source Sans Pro",sans-serif !important
+}
+.sequence-diagram [fill="#ffffff"],.flow-chart [fill="#ffffff"] {
+  fill:#f6f6f6
+}
+.sequence-diagram [stroke="#000000"],.flow-chart [stroke="#000000"] {
+  stroke:#3f3f3f
+}
+.sequence-diagram text[stroke="#000000"],.flow-chart text[stroke="#000000"] {
+  stroke:none
+}
+.sequence-diagram [fill="#000"],.flow-chart [fill="#000"],.sequence-diagram [fill="#000000"],.flow-chart [fill="#000000"],.sequence-diagram [fill="black"],.flow-chart [fill="black"] {
+  fill:#3f3f3f
+}
+ul,ol {
+  margin-bottom:1.1em
+}
+ul ul,ol ul,ul ol,ol ol {
+  margin-bottom:1.1em
+}
+kbd {
+  padding:.1em .6em;
+  border:1px solid rgba(63,63,63,0.25);
+  -webkit-box-shadow:0 1px 0 rgba(63,63,63,0.25);
+  box-shadow:0 1px 0 rgba(63,63,63,0.25);
+  font-size:.7em;
+  font-family:sans-serif;
+  background-color:#fff;
+  color:#333;
+  border-radius:3px;
+  display:inline-block;
+  margin:0 .1em;
+  white-space:nowrap
+}
+.toc ul {
+  list-style-type:none;
+  margin-bottom:15px
+}
+</style>
+<!-- 该css供自定义样式 -->
+<link href="../leanote-html.css" rel="stylesheet">
+</head>
+
+<body>
+
+	<div class="note-container">
+		<h1 class="title" id="leanote-title">第二 节:springboot整合篇(飞机篇)</h1>
+		<div class="content-html" id="leanote-content"><p><span style="font-size: 24pt;" data-mce-style="font-size: 24pt;"><strong>1:springboot整合jdbc</strong></span></p><p><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong>1.1:导入的maven依赖</strong></span></p><pre id="leanote_ace_1553235218382_0" class="ace-tomorrow brush:xml" draggable="false" data-mce-style="line-height: 1.5; font-size: 14px; height: 210px;">&lt;dependency&gt;
+	&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+	&lt;artifactId&gt;spring-boot-starter-jdbc&lt;/artifactId&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+	&lt;groupId&gt;mysql&lt;/groupId&gt;
+	&lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+	&lt;scope&gt;runtime&lt;/scope&gt;
+&lt;/dependency&gt;</pre><p><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong>1.2:配置相关数据源:</strong></span></p><pre id="leanote_ace_1553235248172_0" class="ace-tomorrow" draggable="false" data-mce-style="line-height: 1.5; font-size: 14px; height: 126px;">spring:
+&nbsp;&nbsp;datasource:
+&nbsp;&nbsp;&nbsp;&nbsp;username:&nbsp;root
+&nbsp;&nbsp;&nbsp;&nbsp;data-password:&nbsp;123456
+&nbsp;&nbsp;&nbsp;&nbsp;url:&nbsp;jdbc:mysql://47.104.128.12:3306/tuling-vip
+&nbsp;&nbsp;&nbsp;&nbsp;driver-class-name:&nbsp;com.mysql.jdbc.Driver</pre><p><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong>1.3：测试</strong></span></p><pre id="leanote_ace_1553235584684_0" class="ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 231px;">	@Autowired
+	private&nbsp;DataSource&nbsp;dataSource;
+
+	@Test
+	public&nbsp;void&nbsp;contextLoads()&nbsp;{
+	}
+
+	@Test
+	public&nbsp;void&nbsp;testDbType()&nbsp;{
+		System.out.println("自动装配数据源的类型:"+dataSource.getClass());
+	}</pre><p><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong>1.4)jdbc 以及数据源的自动装配原理</strong></span></p><p><span style="font-size: 14pt; line-height: 34.2857px; color: #ff0000; background-color: #ffffff;" data-mce-style="font-size: 14pt; line-height: 34.2857px; color: #ff0000; background-color: #ffffff;"><strong>1.4.1)数据源的自动装配</strong></span></p><pre id="leanote_ace_1553236040283_0" class="ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 1974px;">	/**
+	&nbsp;*&nbsp;Tomcat&nbsp;Pool&nbsp;DataSource&nbsp;configuration.
+	&nbsp;*/
+	@ConditionalOnClass(org.apache.tomcat.jdbc.pool.DataSource.class)
+	@ConditionalOnMissingBean(DataSource.class)
+	@ConditionalOnProperty(name&nbsp;=&nbsp;"spring.datasource.type",&nbsp;havingValue&nbsp;=&nbsp;"org.apache.tomcat.jdbc.pool.DataSource",&nbsp;matchIfMissing&nbsp;=&nbsp;true)
+	static&nbsp;class&nbsp;Tomcat&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//配置tomcat&nbsp;连接池的数据源
+		@Bean
+		@ConfigurationProperties(prefix&nbsp;=&nbsp;"spring.datasource.tomcat")
+		public&nbsp;org.apache.tomcat.jdbc.pool.DataSource&nbsp;dataSource(
+				DataSourceProperties&nbsp;properties)&nbsp;{
+			org.apache.tomcat.jdbc.pool.DataSource&nbsp;dataSource&nbsp;=&nbsp;createDataSource(
+					properties,&nbsp;org.apache.tomcat.jdbc.pool.DataSource.class);
+			DatabaseDriver&nbsp;databaseDriver&nbsp;=&nbsp;DatabaseDriver
+					.fromJdbcUrl(properties.determineUrl());
+			String&nbsp;validationQuery&nbsp;=&nbsp;databaseDriver.getValidationQuery();
+			if&nbsp;(validationQuery&nbsp;!=&nbsp;null)&nbsp;{
+				dataSource.setTestOnBorrow(true);
+				dataSource.setValidationQuery(validationQuery);
+			}
+			return&nbsp;dataSource;
+		}
+
+	}
+
+	/**
+	&nbsp;*&nbsp;Hikari&nbsp;DataSource&nbsp;configuration.
+	&nbsp;*/
+	@ConditionalOnClass(HikariDataSource.class)
+	@ConditionalOnMissingBean(DataSource.class)
+	@ConditionalOnProperty(name&nbsp;=&nbsp;"spring.datasource.type",&nbsp;havingValue&nbsp;=&nbsp;"com.zaxxer.hikari.HikariDataSource",&nbsp;matchIfMissing&nbsp;=&nbsp;true)
+	static&nbsp;class&nbsp;Hikari&nbsp;{
+
+		@Bean
+		@ConfigurationProperties(prefix&nbsp;=&nbsp;"spring.datasource.hikari")
+		public&nbsp;HikariDataSource&nbsp;dataSource(DataSourceProperties&nbsp;properties)&nbsp;{
+			HikariDataSource&nbsp;dataSource&nbsp;=&nbsp;createDataSource(properties,
+					HikariDataSource.class);
+			if&nbsp;(StringUtils.hasText(properties.getName()))&nbsp;{
+				dataSource.setPoolName(properties.getName());
+			}
+			return&nbsp;dataSource;
+		}
+
+	}
+
+	/**
+	&nbsp;*&nbsp;DBCP&nbsp;DataSource&nbsp;configuration.
+	&nbsp;*/
+	@ConditionalOnClass(org.apache.commons.dbcp2.BasicDataSource.class)
+	@ConditionalOnMissingBean(DataSource.class)
+	@ConditionalOnProperty(name&nbsp;=&nbsp;"spring.datasource.type",&nbsp;havingValue&nbsp;=&nbsp;"org.apache.commons.dbcp2.BasicDataSource",&nbsp;matchIfMissing&nbsp;=&nbsp;true)
+	static&nbsp;class&nbsp;Dbcp2&nbsp;{
+
+		@Bean
+		@ConfigurationProperties(prefix&nbsp;=&nbsp;"spring.datasource.dbcp2")
+		public&nbsp;org.apache.commons.dbcp2.BasicDataSource&nbsp;dataSource(
+				DataSourceProperties&nbsp;properties)&nbsp;{
+			return&nbsp;createDataSource(properties,
+					org.apache.commons.dbcp2.BasicDataSource.class);
+		}
+
+	}
+
+&nbsp;&nbsp;&nbsp;&nbsp;//通过spring.dataSource.tpye&nbsp;来指定装配的数据源
+	@ConditionalOnMissingBean(DataSource.class)
+	@ConditionalOnProperty(name&nbsp;=&nbsp;"spring.datasource.type")
+	static&nbsp;class&nbsp;Generic&nbsp;{
+
+		@Bean
+		public&nbsp;DataSource&nbsp;dataSource(DataSourceProperties&nbsp;properties)&nbsp;{
+			return&nbsp;properties.initializeDataSourceBuilder().build();
+		}
+
+	}
+	
+	//用于整合druid&nbsp;等数据源配置的
+	public&nbsp;DataSourceBuilder&lt;?&gt;&nbsp;initializeDataSourceBuilder()&nbsp;{
+		return&nbsp;DataSourceBuilder.create(getClassLoader()).type(getType())
+				.driverClassName(determineDriverClassName()).url(determineUrl())
+				.username(determineUsername()).password(determinePassword());
+	}
+	
+	public&nbsp;T&nbsp;build()&nbsp;{
+	&nbsp;&nbsp;&nbsp;&nbsp;//数据源类型
+		Class&lt;?&nbsp;extends&nbsp;DataSource&gt;&nbsp;type&nbsp;=&nbsp;getType();
+		//t通过反射创建数据源
+		DataSource&nbsp;result&nbsp;=&nbsp;BeanUtils.instantiateClass(type);
+		maybeGetDriverClassName();
+		bind(result);
+		return&nbsp;(T)&nbsp;result;
+	}</pre><p><span style="color: #ff0000;" data-mce-style="color: #ff0000;"><strong><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;">&nbsp;1.4.2)jdbcTemplate自动装配</span></strong></span><br></p><pre id="leanote_ace_1553236465528_0" class="ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 1134px;">@Configuration
+@ConditionalOnClass({&nbsp;DataSource.class,&nbsp;JdbcTemplate.class&nbsp;})
+@ConditionalOnSingleCandidate(DataSource.class)
+@AutoConfigureAfter(DataSourceAutoConfiguration.class)
+@EnableConfigurationProperties(JdbcProperties.class)
+public&nbsp;class&nbsp;JdbcTemplateAutoConfiguration&nbsp;{
+
+	@Configuration
+	static&nbsp;class&nbsp;JdbcTemplateConfiguration&nbsp;{
+
+		private&nbsp;final&nbsp;DataSource&nbsp;dataSource;
+
+		private&nbsp;final&nbsp;JdbcProperties&nbsp;properties;
+
+		JdbcTemplateConfiguration(DataSource&nbsp;dataSource,&nbsp;JdbcProperties&nbsp;properties)&nbsp;{
+			this.dataSource&nbsp;=&nbsp;dataSource;
+			this.properties&nbsp;=&nbsp;properties;
+		}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//jdbcTemplate&nbsp;配置
+		@Bean
+		@Primary
+		@ConditionalOnMissingBean(JdbcOperations.class)
+		public&nbsp;JdbcTemplate&nbsp;jdbcTemplate()&nbsp;{
+			JdbcTemplate&nbsp;jdbcTemplate&nbsp;=&nbsp;new&nbsp;JdbcTemplate(this.dataSource);
+			JdbcProperties.Template&nbsp;template&nbsp;=&nbsp;this.properties.getTemplate();
+			jdbcTemplate.setFetchSize(template.getFetchSize());
+			jdbcTemplate.setMaxRows(template.getMaxRows());
+			if&nbsp;(template.getQueryTimeout()&nbsp;!=&nbsp;null)&nbsp;{
+				jdbcTemplate
+						.setQueryTimeout((int)&nbsp;template.getQueryTimeout().getSeconds());
+			}
+			return&nbsp;jdbcTemplate;
+		}
+
+	}
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+	@Configuration
+	@Import(JdbcTemplateConfiguration.class)
+	static&nbsp;class&nbsp;NamedParameterJdbcTemplateConfiguration&nbsp;{
+
+		@Bean
+		@Primary
+		@ConditionalOnSingleCandidate(JdbcTemplate.class)
+		@ConditionalOnMissingBean(NamedParameterJdbcOperations.class)
+		public&nbsp;NamedParameterJdbcTemplate&nbsp;namedParameterJdbcTemplate(
+				JdbcTemplate&nbsp;jdbcTemplate)&nbsp;{
+			return&nbsp;new&nbsp;NamedParameterJdbcTemplate(jdbcTemplate);
+		}
+
+	}
+
+}</pre><p><strong><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;">&nbsp;测试:</span></strong><br></p><pre id="leanote_ace_1553237094657_0" class="ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 315px;">	@Autowired
+	private&nbsp;JdbcTemplate&nbsp;jdbcTemplate;
+
+
+	@Test
+	public&nbsp;void&nbsp;testDbType()&nbsp;{
+		System.out.println("自动装配数据源的类型:"+dataSource.getClass());
+	}
+
+	@Test
+	public&nbsp;void&nbsp;testJdbcTemplate()&nbsp;{
+		List&lt;Map&lt;String,Object&gt;&gt;&nbsp;employeeList&nbsp;=&nbsp;jdbcTemplate.queryForList("select&nbsp;*&nbsp;from&nbsp;employee");
+
+		System.out.println(employeeList.size());
+	}</pre><p>&nbsp;<br></p><p>&nbsp;<br></p><p><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong>2.springboot如何优雅的整合druid +监控</strong></span></p><p><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong>&nbsp;2.1)加入druid的依赖</strong></span></p><pre id="leanote_ace_1553237912887_0" class="ace-tomorrow brush:xml" draggable="false" data-mce-style="line-height: 1.5; font-size: 14px; height: 252px;">&lt;dependency&gt;
+	&lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+	&lt;artifactId&gt;druid&lt;/artifactId&gt;
+	&lt;version&gt;1.1.10&lt;/version&gt;
+&lt;/dependency&gt;
+
+//自定义属性绑定配置
+&lt;dependency&gt;
+	&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+	&lt;artifactId&gt;spring-boot-configuration-processor&lt;/artifactId&gt;
+	&lt;optional&gt;true&lt;/optional&gt;
+&lt;/dependency&gt;</pre><p><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong>2.2）配置druid的数据源属性</strong></span></p><p><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong><img src="第二-节-springboot整合篇-飞机篇_files/5c95fe5dab64417c5200036d.png" alt="" data-mce-src="第二-节-springboot整合篇-飞机篇_files/5c95fe5dab64417c5200036d.png"></strong></span></p><p>&nbsp;<br></p><p><span style="color: #ff0000;" data-mce-style="color: #ff0000;"><strong>我们发现上面部分 红框 部分是显示黄色，在datasource.properties的文件中，没有属性进行一一映射</strong></span></p><p><img src="第二-节-springboot整合篇-飞机篇_files/5c95fe5dab64417c52000370.png" alt="" data-mce-src="第二-节-springboot整合篇-飞机篇_files/5c95fe5dab64417c52000370.png"></p><p><strong><span style="color: #ff0000;" data-mce-style="color: #ff0000;">所以我们看到的带红框部分是没有映射到数据源中.</span></strong></p><p><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong><img src="第二-节-springboot整合篇-飞机篇_files/5c95fe5dab64417c5200036c.png" alt="" data-mce-src="第二-节-springboot整合篇-飞机篇_files/5c95fe5dab64417c5200036c.png"></strong></span></p><p><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong>2.3)解决办法（优雅）就是我们自己配置一个druid数据源</strong></span></p><p>&nbsp;<br></p><pre id="leanote_ace_1553241439997_0" class="ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 483px;">spring:
+&nbsp;&nbsp;datasource:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;druid:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;username:&nbsp;root
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password:&nbsp;123456
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;url:&nbsp;jdbc:mysql://47.104.128.12:3306/tuling-vip
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;driverClassName:&nbsp;com.mysql.jdbc.Driver
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initialSize:&nbsp;5
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;minIdle:&nbsp;5
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maxActive:&nbsp;20
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maxWait:&nbsp;60000
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;timeBetweenEvictionRunsMillis:&nbsp;60000
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;minEvictableIdleTimeMillis:&nbsp;300000
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;validationQuery:&nbsp;SELECT&nbsp;1&nbsp;FROM&nbsp;DUAL
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;testWhileIdle:&nbsp;true
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;testOnBorrow:&nbsp;false
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;testOnReturn:&nbsp;false
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;poolPreparedStatements:&nbsp;true
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filters:&nbsp;stat,wall,log4j
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maxPoolPreparedStatementPerConnectionSize:&nbsp;20
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;useGlobalDataSourceStat:&nbsp;true
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;connectionProperties:&nbsp;druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500</pre><p><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong>对应的接受配置类(省略了getSet方法....)</strong></span></p><pre id="leanote_ace_1553241666380_0" class="ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 504px;">@ConfigurationProperties(prefix&nbsp;=&nbsp;"spring.datasource.druid")&nbsp;&nbsp;//扫描配置类的属性前缀
+public&nbsp;class&nbsp;DruidDataSourceProperties&nbsp;{
+
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;String&nbsp;username;
+
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;String&nbsp;password;
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;String&nbsp;jdbcUrl;
+
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;String&nbsp;driverClassName;
+
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;Integer&nbsp;initialSize;
+
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;Integer&nbsp;maxActive;
+
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;Integer&nbsp;minIdle;
+
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;long&nbsp;maxWait;
+
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;boolean&nbsp;poolPreparedStatements;
+
+}
+</pre><p><span style="color: #ff0000;" data-mce-style="color: #ff0000;"><strong>自己定制一个druid的配置类</strong></span></p><pre id="leanote_ace_1553241731485_0" class="ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 483px;">@Configuration
+@EnableConfigurationProperties(value&nbsp;=&nbsp;DruidDataSourceProperties.class)
+public&nbsp;class&nbsp;DruidDataSourceConfig&nbsp;{
+
+&nbsp;&nbsp;&nbsp;&nbsp;@Autowired
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;DruidDataSourceProperties&nbsp;druidDataSourceProperties;
+
+&nbsp;&nbsp;&nbsp;&nbsp;@Bean
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;DataSource&nbsp;dataSource()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(druidDataSourceProperties);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DruidDataSource&nbsp;druidDataSource&nbsp;=&nbsp;new&nbsp;DruidDataSource();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;druidDataSource.setUsername(druidDataSourceProperties.getUsername());
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;druidDataSource.setPassword(druidDataSourceProperties.getPassword());
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;druidDataSource.setUrl(druidDataSourceProperties.getJdbcUrl());
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;druidDataSource.setDriverClassName(druidDataSourceProperties.getDriverClassName());
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;druidDataSource.setInitialSize(druidDataSourceProperties.getInitialSize());
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;druidDataSource.setMinIdle(druidDataSourceProperties.getMinIdle());
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;druidDataSource.setMaxActive(druidDataSourceProperties.getMaxActive());
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;druidDataSource.setMaxWait(druidDataSourceProperties.getMaxWait());
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;druidDataSourceProperties.setPoolPreparedStatements(druidDataSourceProperties.isPoolPreparedStatements());
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;druidDataSource;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}​</pre><p><span style="font-size: 12pt; line-height: 34.2857px;" data-mce-style="font-size: 12pt; line-height: 34.2857px;"><strong>再来查看对应的数据源的属性 已经成功的映射到数据源中</strong></span></p><p><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong><img src="第二-节-springboot整合篇-飞机篇_files/5c95fe5dab64417c5200036f.png" alt="" data-mce-src="第二-节-springboot整合篇-飞机篇_files/5c95fe5dab64417c5200036f.png"></strong></span></p><p>&nbsp;<br></p><p><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong>2.4)配置数据源监控，配置一个statViewSerlvet(后端管理) &nbsp;WebStatFilter sql监控</strong></span></p><pre id="leanote_ace_1553245143359_0" class="ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 504px;">&nbsp;&nbsp;&nbsp;&nbsp;/**
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;配置druid管理后台的servlet
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;@Bean
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;ServletRegistrationBean&nbsp;statViewSerlvet()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ServletRegistrationBean&nbsp;bean&nbsp;=&nbsp;new&nbsp;ServletRegistrationBean(new&nbsp;StatViewServlet(),"/druid/*");
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Map&lt;String,Object&gt;&nbsp;initParameters&nbsp;=&nbsp;new&nbsp;HashMap&lt;&gt;();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initParameters.put("loginUsername","admin");
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initParameters.put("loginPassword","123456");
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bean.setInitParameters(initParameters);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;bean;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;&nbsp;@Bean
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;FilterRegistrationBean&nbsp;filterRegistrationBean()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FilterRegistrationBean&nbsp;filterRegistrationBean&nbsp;=&nbsp;new&nbsp;FilterRegistrationBean(new&nbsp;WebStatFilter());
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filterRegistrationBean.setUrlPatterns(Arrays.asList("/*"));
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Map&lt;String,Object&gt;&nbsp;initParams&nbsp;=&nbsp;new&nbsp;HashMap&lt;&gt;();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initParams.put("exclusions","*.js,*.css,/druid/*");
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filterRegistrationBean.setInitParameters(initParams);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&nbsp;filterRegistrationBean;
+&nbsp;&nbsp;&nbsp;&nbsp;}​</pre><p><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong>监控访问路径:<a href="http://localhost:8080/druid/" data-mce-href="http://localhost:8080/druid/">http://localhost:8080/druid/</a></strong></span></p><p><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong><img src="第二-节-springboot整合篇-飞机篇_files/5c95fe5dab64417c5200036e.png" alt="" data-mce-src="第二-节-springboot整合篇-飞机篇_files/5c95fe5dab64417c5200036e.png"></strong></span></p><p>&nbsp;<br></p><p>&nbsp;<br></p><p><span style="font-size: 18pt;" data-mce-style="font-size: 18pt;"><strong>3:springboot整合 mybaits</strong></span></p><p><span style="font-size: 14pt; line-height: 34.2857px;" data-mce-style="font-size: 14pt; line-height: 34.2857px;"><strong>3.1) 导入maven依赖</strong></span></p><pre id="leanote_ace_1553245544932_0" class="ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 420px;">		&lt;dependency&gt;
+			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-boot-starter-jdbc&lt;/artifactId&gt;
+		&lt;/dependency&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+		&lt;/dependency&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;
+			&lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;
+			&lt;version&gt;2.0.0&lt;/version&gt;
+		&lt;/dependency&gt;
+
+		&lt;dependency&gt;
+			&lt;groupId&gt;mysql&lt;/groupId&gt;
+			&lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+			&lt;scope&gt;runtime&lt;/scope&gt;
+			&lt;version&gt;5.1.46&lt;/version&gt;
+		&lt;/dependency&gt;</pre><p><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong>3.2)让我们看下mybatis自动配置类给我们配置了什么组件</strong></span></p><p><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong>&nbsp; &nbsp; &nbsp; &nbsp;①:导入了SqlSessionFactory</strong></span></p><p><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong>&nbsp; &nbsp; &nbsp; &nbsp;②：导入了sqlSessionTemplate</strong></span></p><p><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong>&nbsp; &nbsp; &nbsp; &nbsp;③：导入了mapperScanner</strong></span></p><pre id="leanote_ace_1553258217451_0" class="ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 1953px;">@org.springframework.context.annotation.Configuration
+@ConditionalOnClass({&nbsp;SqlSessionFactory.class,&nbsp;SqlSessionFactoryBean.class&nbsp;})
+@ConditionalOnSingleCandidate(DataSource.class)
+@EnableConfigurationProperties(MybatisProperties.class)
+@AutoConfigureAfter(DataSourceAutoConfiguration.class)
+public&nbsp;class&nbsp;MybatisAutoConfiguration&nbsp;implements&nbsp;InitializingBean&nbsp;{
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;1:自动装配了&nbsp;sqlSessionFactory
+&nbsp;&nbsp;@Bean
+&nbsp;&nbsp;@ConditionalOnMissingBean
+&nbsp;&nbsp;public&nbsp;SqlSessionFactory&nbsp;sqlSessionFactory(DataSource&nbsp;dataSource)&nbsp;throws&nbsp;Exception&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;SqlSessionFactoryBean&nbsp;factory&nbsp;=&nbsp;new&nbsp;SqlSessionFactoryBean();
+&nbsp;&nbsp;&nbsp;&nbsp;factory.setDataSource(dataSource);
+&nbsp;&nbsp;&nbsp;&nbsp;factory.setVfs(SpringBootVFS.class);
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(StringUtils.hasText(this.properties.getConfigLocation()))&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;factory.setConfigLocation(this.resourceLoader.getResource(this.properties.getConfigLocation()));
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;applyConfiguration(factory);
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(this.properties.getConfigurationProperties()&nbsp;!=&nbsp;null)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;factory.setConfigurationProperties(this.properties.getConfigurationProperties());
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!ObjectUtils.isEmpty(this.interceptors))&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;factory.setPlugins(this.interceptors);
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(this.databaseIdProvider&nbsp;!=&nbsp;null)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;factory.setDatabaseIdProvider(this.databaseIdProvider);
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(StringUtils.hasLength(this.properties.getTypeAliasesPackage()))&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;factory.setTypeAliasesPackage(this.properties.getTypeAliasesPackage());
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(this.properties.getTypeAliasesSuperType()&nbsp;!=&nbsp;null)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;factory.setTypeAliasesSuperType(this.properties.getTypeAliasesSuperType());
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(StringUtils.hasLength(this.properties.getTypeHandlersPackage()))&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;factory.setTypeHandlersPackage(this.properties.getTypeHandlersPackage());
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!ObjectUtils.isEmpty(this.properties.resolveMapperLocations()))&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;factory.setMapperLocations(this.properties.resolveMapperLocations());
+&nbsp;&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;factory.getObject();
+&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;2:配置了sqlSessionTemplate
+&nbsp;&nbsp;@Bean
+&nbsp;&nbsp;@ConditionalOnMissingBean
+&nbsp;&nbsp;public&nbsp;SqlSessionTemplate&nbsp;sqlSessionTemplate(SqlSessionFactory&nbsp;sqlSessionFactory)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;ExecutorType&nbsp;executorType&nbsp;=&nbsp;this.properties.getExecutorType();
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(executorType&nbsp;!=&nbsp;null)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;new&nbsp;SqlSessionTemplate(sqlSessionFactory,&nbsp;executorType);
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;new&nbsp;SqlSessionTemplate(sqlSessionFactory);
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;}
+
+&nbsp;&nbsp;3：自动装配&nbsp;导入mapperScanner
+&nbsp;&nbsp;public&nbsp;static&nbsp;class&nbsp;AutoConfiguredMapperScannerRegistrar
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;implements&nbsp;BeanFactoryAware,&nbsp;ImportBeanDefinitionRegistrar,&nbsp;ResourceLoaderAware&nbsp;{
+
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;BeanFactory&nbsp;beanFactory;
+
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;ResourceLoader&nbsp;resourceLoader;
+
+&nbsp;&nbsp;&nbsp;&nbsp;@Override
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;registerBeanDefinitions(AnnotationMetadata&nbsp;importingClassMetadata,&nbsp;BeanDefinitionRegistry&nbsp;registry)&nbsp;{
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!AutoConfigurationPackages.has(this.beanFactory))&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;logger.debug("Could&nbsp;not&nbsp;determine&nbsp;auto-configuration&nbsp;package,&nbsp;automatic&nbsp;mapper&nbsp;scanning&nbsp;disabled.");
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;logger.debug("Searching&nbsp;for&nbsp;mappers&nbsp;annotated&nbsp;with&nbsp;@Mapper");
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;String&gt;&nbsp;packages&nbsp;=&nbsp;AutoConfigurationPackages.get(this.beanFactory);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(logger.isDebugEnabled())&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;packages.forEach(pkg&nbsp;-&gt;&nbsp;logger.debug("Using&nbsp;auto-configuration&nbsp;base&nbsp;package&nbsp;'{}'",&nbsp;pkg));
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ClassPathMapperScanner&nbsp;scanner&nbsp;=&nbsp;new&nbsp;ClassPathMapperScanner(registry);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(this.resourceLoader&nbsp;!=&nbsp;null)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scanner.setResourceLoader(this.resourceLoader);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scanner.setAnnotationClass(Mapper.class);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scanner.registerFilters();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scanner.doScan(StringUtils.toStringArray(packages));
+
+&nbsp;&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;}
+}
+</pre><p><strong><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;">&nbsp;3.3）把sql写在方法上(mapper文件上必须加上@Mapper注解)</span></strong><br></p><pre id="leanote_ace_1553258435987_0" class="ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 294px;">@Mapper
+public&nbsp;interface&nbsp;EmployeeMapper&nbsp;{
+
+&nbsp;&nbsp;&nbsp;&nbsp;@Select("select&nbsp;*&nbsp;from&nbsp;employee")
+&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Employee&gt;&nbsp;list();
+
+&nbsp;&nbsp;&nbsp;&nbsp;@Select("select&nbsp;*&nbsp;from&nbsp;employee&nbsp;where&nbsp;id=#{id}")
+&nbsp;&nbsp;&nbsp;&nbsp;Employee&nbsp;findOne(Integer&nbsp;id);
+
+&nbsp;&nbsp;&nbsp;&nbsp;@Options(useGeneratedKeys&nbsp;=true,keyProperty&nbsp;=&nbsp;"id")
+&nbsp;&nbsp;&nbsp;&nbsp;@Insert("insert&nbsp;into&nbsp;employee(last_name,email,gender,dept_id)values(#{lastName},#{email},#{gender},#{deptId})")
+&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;save(Employee&nbsp;employee);
+
+}​</pre><p><strong><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;">&nbsp;3.4）把sql写在配置文件上</span></strong><br></p><p><span style="font-size: 18.6667px; line-height: 26.6667px;" data-mce-style="font-size: 18.6667px; line-height: 26.6667px;"><strong>需要制定配置文件位置</strong></span></p><pre id="leanote_ace_1553258539067_0" class="ace-tomorrow brush:xml" draggable="false" data-mce-style="line-height: 1.5; font-size: 14px; height: 105px;">#配置mybatis
+mybatis:
+&nbsp;&nbsp;configuration:
+&nbsp;&nbsp;&nbsp;&nbsp;map-underscore-to-camel-case:&nbsp;true&nbsp;&nbsp;开启驼峰命名
+&nbsp;&nbsp;mapper-locations:&nbsp;classpath:/mybatis/mapper/*.xml&nbsp;&nbsp;指定配置文件的位置</pre><p>&nbsp;<br></p><p><span style="font-size: 18pt;" data-mce-style="font-size: 18pt;"><strong>4:整合Redis</strong></span></p><p><span style="font-size: 14pt; line-height: 34.2857px;" data-mce-style="font-size: 14pt; line-height: 34.2857px;"><strong>4.1)导入的maven依赖</strong></span></p><pre id="leanote_ace_1553261629012_0" class="ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 84px;">		&lt;dependency&gt;
+			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;
+		&lt;/dependency&gt;​</pre><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;"><strong>4.2)自动装配的组件</strong></span></p><pre id="leanote_ace_1553261914131_0" class="ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 861px;">@Configuration
+@ConditionalOnClass(RedisOperations.class)
+@EnableConfigurationProperties(RedisProperties.class)
+@Import({&nbsp;LettuceConnectionConfiguration.class,&nbsp;JedisConnectionConfiguration.class&nbsp;})
+public&nbsp;class&nbsp;RedisAutoConfiguration&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;1:自动装配了redis的操作模板类
+	@Bean
+	@ConditionalOnMissingBean(name&nbsp;=&nbsp;"redisTemplate")
+	public&nbsp;RedisTemplate&lt;Object,&nbsp;Object&gt;&nbsp;redisTemplate(
+			RedisConnectionFactory&nbsp;redisConnectionFactory)&nbsp;throws&nbsp;UnknownHostException&nbsp;{
+		RedisTemplate&lt;Object,&nbsp;Object&gt;&nbsp;template&nbsp;=&nbsp;new&nbsp;RedisTemplate&lt;&gt;();
+		template.setConnectionFactory(redisConnectionFactory);
+		return&nbsp;template;
+	}
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;2：自动装配了StringRedisTemplate模板类
+	@Bean
+	@ConditionalOnMissingBean
+	public&nbsp;StringRedisTemplate&nbsp;stringRedisTemplate(
+			RedisConnectionFactory&nbsp;redisConnectionFactory)&nbsp;throws&nbsp;UnknownHostException&nbsp;{
+		StringRedisTemplate&nbsp;template&nbsp;=&nbsp;new&nbsp;StringRedisTemplate();
+		template.setConnectionFactory(redisConnectionFactory);
+		return&nbsp;template;
+	}
+
+}
+
+
+@Configuration
+@ConditionalOnClass({&nbsp;GenericObjectPool.class,&nbsp;JedisConnection.class,&nbsp;Jedis.class&nbsp;})
+class&nbsp;JedisConnectionConfiguration&nbsp;extends&nbsp;RedisConnectionConfiguration&nbsp;{
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;redis的链接工厂
+	@Bean
+	@ConditionalOnMissingBean(RedisConnectionFactory.class)
+	public&nbsp;JedisConnectionFactory&nbsp;redisConnectionFactory()&nbsp;throws&nbsp;UnknownHostException&nbsp;{
+		return&nbsp;createJedisConnectionFactory();
+	}
+</pre><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;"><strong>4.3)所需的配置类,我们去RedisProperties配置类 看下可以具体配置哪些属性</strong></span></p><pre id="leanote_ace_1553262150011_0" class="ace-tomorrow ace_focus" data-mce-style="line-height: 1.5; font-size: 14px; height: 693px;">@ConfigurationProperties(prefix&nbsp;=&nbsp;"spring.redis")
+public&nbsp;class&nbsp;RedisProperties&nbsp;{
+
+	private&nbsp;int&nbsp;database&nbsp;=&nbsp;0;
+
+	private&nbsp;String&nbsp;url;
+
+	private&nbsp;String&nbsp;host&nbsp;=&nbsp;"localhost";
+
+	private&nbsp;String&nbsp;password;
+
+	private&nbsp;int&nbsp;port&nbsp;=&nbsp;6379;
+
+	private&nbsp;boolean&nbsp;ssl;
+
+	private&nbsp;Duration&nbsp;timeout;
+
+	private&nbsp;Sentinel&nbsp;sentinel;
+
+	private&nbsp;Cluster&nbsp;cluster;​
+}
+
+具体的配置项
+spring:
+&nbsp;&nbsp;redis:
+&nbsp;&nbsp;&nbsp;&nbsp;host:&nbsp;47.104.128.12
+&nbsp;&nbsp;&nbsp;&nbsp;port:&nbsp;6379
+&nbsp;&nbsp;&nbsp;&nbsp;password:&nbsp;123456
+&nbsp;&nbsp;&nbsp;&nbsp;jedis:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pool:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;max-active:&nbsp;20
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;max-idle:&nbsp;10
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;min-idle:&nbsp;5</pre><p><strong><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;">4.4）使用redis 自动配置的默认的redisTemplate是使用jdk自带的 序列化工具,通过redis 客户端工具看到的key &nbsp;value是 字节形式的&nbsp;</span></strong><br></p><p><span style="font-size: 18.6667px; line-height: 26.6667px;" data-mce-style="font-size: 18.6667px; line-height: 26.6667px;"><strong>阅读起来不方便,</strong></span></p><p><img src="第二-节-springboot整合篇-飞机篇_files/5c9713f5266bba288d000002.png" alt="" data-mce-src="第二-节-springboot整合篇-飞机篇_files/5c9713f5266bba288d000002.png"></p><p><strong><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;">我们如何修改 redisTemplate的序列化工具 就是我们自己配置一个RedisTemplate</span></strong></p><pre id="leanote_ace_1553405012131_0" class="ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 273px;">@Configuration
+public&nbsp;class&nbsp;RedisConfig&nbsp;{
+
+&nbsp;&nbsp;&nbsp;&nbsp;@Bean
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;RedisTemplate&lt;Object,&nbsp;Object&gt;&nbsp;redisTemplate(RedisConnectionFactory&nbsp;redisConnectionFactory)&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RedisTemplate&lt;Object,&nbsp;Object&gt;&nbsp;template&nbsp;=&nbsp;new&nbsp;RedisTemplate&lt;&gt;();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//设置自己的序列化工具
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;template.setDefaultSerializer(new&nbsp;Jackson2JsonRedisSerializer&lt;Object&gt;(Object.class));
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;template.setConnectionFactory(redisConnectionFactory);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;template;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}
+</pre><p>&nbsp;<br></p><p>&nbsp;<br></p><p>&nbsp;<br></p><p>&nbsp;<br></p><p><strong><span style="font-size: 18pt;" data-mce-style="font-size: 18pt;">5）整合Swagger2&nbsp;</span></strong></p><p><span style="font-size: 14pt; line-height: 34.2857px;" data-mce-style="font-size: 14pt; line-height: 34.2857px;"><strong>5.1)Swagger2是什么?</strong></span></p><p><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;">它的出现就是为了方便进行测试后台的restful形式的接口，实现动态的更新，当我们在后台的接口修改了后，swagger可以实现自动的更新，而不需要认为的维护这个接口进行测试</span></p><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;"><strong>5.2）为啥要用Swagger</strong></span></p><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;程序员最喜欢什么？ 最喜欢别人写文档</strong></span></p><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;"><strong>&nbsp; &nbsp; &nbsp; &nbsp;程序员最不喜欢什么？最不喜欢自己写文旦</strong></span></p><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;"><strong>5.3)整合步骤</strong></span></p><p><span style="font-size: 18.6667px; line-height: 26.6667px;" data-mce-style="font-size: 18.6667px; line-height: 26.6667px;"><strong>第一步:加入maven依赖</strong></span></p><pre id="leanote_ace_1553333785510_0" class="ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 231px;">		&lt;dependency&gt;
+			&lt;groupId&gt;io.springfox&lt;/groupId&gt;
+			&lt;artifactId&gt;springfox-swagger2&lt;/artifactId&gt;
+			&lt;version&gt;2.7.0&lt;/version&gt;
+		&lt;/dependency&gt;
+
+		&lt;dependency&gt;
+			&lt;groupId&gt;io.springfox&lt;/groupId&gt;
+			&lt;artifactId&gt;springfox-swagger-ui&lt;/artifactId&gt;
+			&lt;version&gt;2.7.0&lt;/version&gt;
+		&lt;/dependency&gt;﻿​&nbsp;</pre><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;"><strong>&nbsp;5.4)加入swagger2的配置</strong></span></p><pre id="leanote_ace_1553333814962_0" class="ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 462px;">@Configuration
+public&nbsp;class&nbsp;Swagger2Config&nbsp;{
+
+&nbsp;&nbsp;&nbsp;&nbsp;@Bean
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;Docket&nbsp;createRestApi()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;new&nbsp;Docket(DocumentationType.SWAGGER_2)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.apiInfo(apiInfo())
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.select()
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.apis(RequestHandlerSelectors.basePackage("com.tuling.controller"))&nbsp;//你需要生成文档所在的包
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.paths(PathSelectors.any())
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.build();
+&nbsp;&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;ApiInfo&nbsp;apiInfo()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;new&nbsp;ApiInfoBuilder()
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.title("springboot利用swagger构建api文档")//文档标题
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.description("简单优雅的restfun风格，http://blog.csdn.net/saytime")&nbsp;//描述
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.termsOfServiceUrl("http://blog.csdn.net/saytime")
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.version("1.0")
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.build();
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}</pre><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;"><strong>&nbsp;5.5)在配置类上开启swagger2的文档</strong></span><br></p><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;"><strong>@EnableSwagger2</strong></span></p><pre id="leanote_ace_1553334958973_0" class="ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 63px;">@SpringBootApplication
+@EnableSwagger2
+public&nbsp;class&nbsp;TulingvipSpringbootSwagger2Application&nbsp;{</pre><p>&nbsp;<br></p><p><strong><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;">5.6）使用示例:</span></strong></p><pre id="leanote_ace_1553335103731_0" class="ace-tomorrow" draggable="false" data-mce-style="line-height: 1.5; font-size: 14px; height: 2352px;">package&nbsp;com.tuling.controller;
+
+import&nbsp;com.tuling.entity.DataNode;
+import&nbsp;com.tuling.entity.User;
+import&nbsp;com.tuling.entity.UserCondition;
+import&nbsp;io.swagger.annotations.*;
+import&nbsp;org.springframework.web.bind.annotation.*;
+
+import&nbsp;java.util.ArrayList;
+import&nbsp;java.util.List;
+
+/**
+&nbsp;*&nbsp;Created&nbsp;by&nbsp;Administrator&nbsp;on&nbsp;2019/3/23.
+&nbsp;*/
+@RestController
+@RequestMapping("/user")
+@Api(value&nbsp;=&nbsp;"用户服务",description&nbsp;=&nbsp;"用户的基本操作")
+public&nbsp;class&nbsp;UserController&nbsp;{
+
+&nbsp;&nbsp;&nbsp;&nbsp;@ApiOperation(value&nbsp;=&nbsp;"用户列表服务",notes&nbsp;=&nbsp;"查詢所有用戶的列表信息")
+&nbsp;&nbsp;&nbsp;&nbsp;@RequestMapping(value&nbsp;=&nbsp;"/list",method&nbsp;=&nbsp;RequestMethod.GET)
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;List&lt;User&gt;&nbsp;list()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;User&gt;&nbsp;userList&nbsp;=&nbsp;new&nbsp;ArrayList&lt;&gt;();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(String&nbsp;key:&nbsp;DataNode.users.keySet())&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userList.add(DataNode.users.get(key));
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;userList;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;&nbsp;@ApiOperation(value&nbsp;="根据用户ID查询用户信息",notes="根据url的id来获取用户详细信息")
+&nbsp;&nbsp;&nbsp;&nbsp;@ApiImplicitParam(name="userId",value&nbsp;=&nbsp;"用户ID",required&nbsp;=&nbsp;true,dataType&nbsp;="Integer",paramType&nbsp;=&nbsp;"path")
+&nbsp;&nbsp;&nbsp;&nbsp;@RequestMapping(value&nbsp;=&nbsp;"/findOneById/{userId}",method&nbsp;=&nbsp;RequestMethod.GET)
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;User&nbsp;findOneById(@PathVariable("userId")&nbsp;Integer&nbsp;userId)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(String&nbsp;key:&nbsp;DataNode.users.keySet())&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User&nbsp;user&nbsp;=&nbsp;DataNode.users.get(key);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(user.getUserId()&nbsp;==&nbsp;userId)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;user;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;null;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;&nbsp;@ApiOperation(value&nbsp;=&nbsp;"根据用户名获取用户信息")
+&nbsp;&nbsp;&nbsp;&nbsp;@RequestMapping(value&nbsp;=&nbsp;"/findOneUserName/{userName}",method&nbsp;=&nbsp;RequestMethod.GET)
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;User&nbsp;findOneByName(@ApiParam(value&nbsp;="用户名",type&nbsp;=&nbsp;"String")&nbsp;@PathVariable("userName")&nbsp;String&nbsp;userName)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(String&nbsp;key:&nbsp;DataNode.users.keySet())&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User&nbsp;user&nbsp;=&nbsp;DataNode.users.get(key);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(user.getUserName().equals(userName))&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;user;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;null;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;&nbsp;@ApiOperation(value&nbsp;=&nbsp;"根据用户名获取用户信息")
+&nbsp;&nbsp;&nbsp;&nbsp;@ApiImplicitParams({
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@ApiImplicitParam(name&nbsp;=&nbsp;"id",&nbsp;value&nbsp;=&nbsp;"用户ID",&nbsp;required&nbsp;=&nbsp;true,&nbsp;dataType&nbsp;=&nbsp;"int",&nbsp;paramType&nbsp;=&nbsp;"query"),
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@ApiImplicitParam(name&nbsp;=&nbsp;"userName",&nbsp;value&nbsp;=&nbsp;"用户名称",&nbsp;required&nbsp;=&nbsp;true,&nbsp;dataType&nbsp;=&nbsp;"String",&nbsp;paramType&nbsp;=&nbsp;"query")
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;)
+&nbsp;&nbsp;&nbsp;&nbsp;@RequestMapping(value&nbsp;=&nbsp;"/findOneByIdAndName",method&nbsp;=&nbsp;RequestMethod.GET)
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;User&nbsp;findOneByIdAndName(@RequestParam&nbsp;String&nbsp;userName,@RequestParam&nbsp;Integer&nbsp;id)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(String&nbsp;key:&nbsp;DataNode.users.keySet())&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User&nbsp;user&nbsp;=&nbsp;DataNode.users.get(key);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(user.getUserName().equals(userName)&nbsp;&amp;&amp;&nbsp;id==user.getUserId())&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;user;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;null;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;&nbsp;@ApiOperation(value&nbsp;=&nbsp;"根据查询条件获取用户信息")
+&nbsp;&nbsp;&nbsp;&nbsp;@RequestMapping(value&nbsp;=&nbsp;"/findOneByCondition",method&nbsp;=&nbsp;RequestMethod.GET)
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;User&nbsp;findOneByCondition(UserCondition&nbsp;userCondition)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(String&nbsp;key:&nbsp;DataNode.users.keySet())&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User&nbsp;user&nbsp;=&nbsp;DataNode.users.get(key);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(user.getUserName().equals(userCondition.getUserName())&nbsp;&amp;&amp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;user.getUserId()==userCondition.getUserId())&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;user;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;null;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}
+
+
+@ApiModel(value&nbsp;=&nbsp;"用户实体")
+public&nbsp;class&nbsp;User&nbsp;{
+
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;User(Integer&nbsp;userId,&nbsp;String&nbsp;userName,&nbsp;String&nbsp;password,&nbsp;String&nbsp;email,&nbsp;String&nbsp;birthDate)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.userId&nbsp;=&nbsp;userId;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.userName&nbsp;=&nbsp;userName;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.password&nbsp;=&nbsp;password;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.email&nbsp;=&nbsp;email;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.birthDate&nbsp;=&nbsp;birthDate;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;&nbsp;@ApiModelProperty(name&nbsp;=&nbsp;"用户id",dataType&nbsp;=&nbsp;"String"&nbsp;,notes&nbsp;=&nbsp;"用户Id")
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;Integer&nbsp;userId;
+
+&nbsp;&nbsp;&nbsp;&nbsp;@ApiModelProperty(name&nbsp;=&nbsp;"用户名",dataType&nbsp;=&nbsp;"String"&nbsp;,notes="用户名")
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;String&nbsp;userName;
+&nbsp;&nbsp;&nbsp;&nbsp;@ApiModelProperty(name&nbsp;=&nbsp;"密码",dataType&nbsp;=&nbsp;"String",notes&nbsp;=&nbsp;"密码")
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;String&nbsp;password;
+&nbsp;&nbsp;&nbsp;&nbsp;@ApiModelProperty(name&nbsp;=&nbsp;"邮箱",dataType&nbsp;=&nbsp;"String"&nbsp;,notes&nbsp;=&nbsp;"邮箱")
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;String&nbsp;email;
+&nbsp;&nbsp;&nbsp;&nbsp;@ApiModelProperty(name&nbsp;=&nbsp;"生日",dataType&nbsp;=&nbsp;"String"&nbsp;,notes&nbsp;=&nbsp;"生日")
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;String&nbsp;birthDate;
+}&nbsp;&nbsp;&nbsp;&nbsp;</pre><p><strong><span style="font-size: 18pt;" data-mce-style="font-size: 18pt;">5.7)访问地址:<a href="http://localhost:8080/swagger-ui.html" data-mce-href="http://localhost:8080/swagger-ui.html">http://localhost:8080/swagger-ui.html</a></span></strong></p><p><span style="font-size: 18pt;" data-mce-style="font-size: 18pt;"><img src="第二-节-springboot整合篇-飞机篇_files/5c960536ab64417e5f00037f.png" alt="" width="1101" height="554" data-mce-src="第二-节-springboot整合篇-飞机篇_files/5c960536ab64417e5f00037f.png"></span></p><p>&nbsp;<br></p><p>&nbsp;常用参数解析:<br></p><p>-&nbsp;<strong>@Api()</strong>用于类；&nbsp;<br>表示标识这个类是swagger的资源&nbsp;<br>-&nbsp;<strong>@ApiOperation()</strong>用于方法；&nbsp;<br>表示一个http请求的操作&nbsp;<br>-&nbsp;<strong>@ApiParam()</strong>用于方法，参数，字段说明；&nbsp;<br>表示对参数的添加元数据（说明或是否必填等）&nbsp;<br>-&nbsp;<strong>@ApiModel()</strong>用于类&nbsp;<br>表示对类进行说明，用于参数用实体类接收&nbsp;<br>-&nbsp;<strong>@ApiModelProperty()</strong>用于方法，字段&nbsp;<br>表示对model属性的说明或者数据操作更改&nbsp;<br>-&nbsp;<strong>@ApiIgnore()</strong>用于类，方法，方法参数&nbsp;<br>表示这个方法或者类被忽略&nbsp;<br>-&nbsp;<strong>@ApiImplicitParam()</strong>&nbsp;用于方法&nbsp;<br>表示单独的请求参数&nbsp;<br>-&nbsp;<strong>@ApiImplicitParams()</strong>&nbsp;用于方法，包含多个 @ApiImplicitParam</p><p>&nbsp;<br></p><p>&nbsp;<br></p><p><span style="font-size: 18pt;" data-mce-style="font-size: 18pt;"><strong>5.7)整合rabbitmq</strong></span></p><p><span style="font-size: 18pt;" data-mce-style="font-size: 18pt;"><strong>5.7.1）我们项目中为什么需要使用消息中间件？</strong></span></p><p><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong>①:异步 &nbsp;</strong></span></p><p><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong>场景:用户注册后，把用户数据入库，然后向用户发送一封邮件，然后在发送一条短信</strong></span></p><p><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong>同步等待:150ms</strong></span></p><p><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong><img src="第二-节-springboot整合篇-飞机篇_files/5c97190c266bba288d000003.png" alt="" data-mce-src="第二-节-springboot整合篇-飞机篇_files/5c97190c266bba288d000003.png"></strong></span></p><p>&nbsp;<br></p><p><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong>异步发送:用户注册，把用户数据入库，然后通过异步任务分别执行发送邮件和短信</strong></span></p><p><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong><img src="第二-节-springboot整合篇-飞机篇_files/5c9719b0266bba288d000004.png" alt="" data-mce-src="第二-节-springboot整合篇-飞机篇_files/5c9719b0266bba288d000004.png"></strong></span></p><p>&nbsp;<br></p><p><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong>队列形式:用户注册数据入库同时，然后发送消息写入mq中（由于写mq的时间很短，机会可以忽略不计）</strong></span></p><p><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong><img src="第二-节-springboot整合篇-飞机篇_files/5c971a05266bba288d000005.png" alt="" data-mce-src="第二-节-springboot整合篇-飞机篇_files/5c971a05266bba288d000005.png"></strong></span></p><p>&nbsp;<br></p><p>&nbsp;<br></p><p>&nbsp;<br></p><p><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong>②：解耦 &nbsp; (用户下订单成功，然后发送一条减少库存的消息发送到mq中)</strong></span></p><p><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong><img src="第二-节-springboot整合篇-飞机篇_files/5c971a4d266bba288d000006.png" alt="" data-mce-src="第二-节-springboot整合篇-飞机篇_files/5c971a4d266bba288d000006.png"></strong></span></p><p><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong>③：流量削峰</strong></span></p><p><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong>&nbsp;比如10W人来抢10个商品，在Mq中 设置队列的长度为10，若队列长度超过10，那么后面的请求直接舍弃</strong></span></p><p><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong>从而来降低对DB的压力</strong></span></p><p><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong><img src="第二-节-springboot整合篇-飞机篇_files/5c971a66266bba288d000007.png" alt="" data-mce-src="第二-节-springboot整合篇-飞机篇_files/5c971a66266bba288d000007.png"></strong></span></p><p>&nbsp;<br></p><p><span style="font-size: 18pt;" data-mce-style="font-size: 18pt;"><strong>5.7.2）rabbtimq的核心概念理解?</strong></span></p><p><span style="font-size: 18pt;" data-mce-style="font-size: 18pt;"><strong>①：Publisher（消息生产者）<br></strong><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;">消息的生产者，也是一个向交换器发布消息的客户端应用程序</span></span></p><p><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong>②：Message (消息对象)<br></strong><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;">消息，消息是不具名的，它由消息头和消息体组成。消息体是不透明的，而消息头则由一系列的可选属性组</span><br><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;">成，这些属性包括routing-key（路由键）、priority（相对于其他消息的优先权）、delivery-mode（指出</span><br><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;">该消息可能需要持久性存储）等</span></span></p><p><span style="font-size: 18.6667px; line-height: 34.2857px;" data-mce-style="font-size: 18.6667px; line-height: 34.2857px;">③：<strong><span style="font-size: 18pt;" data-mce-style="font-size: 18pt;">交换器，用来接收生产者发送的消息并将这些消息路由给服务器中的队列。</span></strong><br>Exchange有4种类型：direct(默认)，fanout(扇形交换机), topic(主题交换机), 和headers(不同交换机)，不同类型的Exchange转发消息的策略有<br>所区别</span></p><p><span style="font-size: 18.6667px; line-height: 34.2857px;" data-mce-style="font-size: 18.6667px; line-height: 34.2857px;"><span style="font-size: 18pt;" data-mce-style="font-size: 18pt;">④：<strong>Queue</strong></span><br>消息队列，用来保存消息直到发送给消费者。它是消息的容器，也是消息的终点。一个消息<br>可投入一个或多个队列。消息一直在队列里面，等待消费者连接到这个队列将其取走。</span></p><p><span style="font-size: 18.6667px; line-height: 34.2857px;" data-mce-style="font-size: 18.6667px; line-height: 34.2857px;"><strong><span style="font-size: 18pt;" data-mce-style="font-size: 18pt;">⑤：Binding</span></strong><br>绑定，用于消息队列和交换器之间的关联。一个绑定就是基于路由键将交换器和消息队列连<br>接起来的路由规则，所以可以将交换器理解成一个由绑定构成的路由表。<br>Exchange 和Queue的绑定可以是多对多的关系</span></p><p><span style="font-size: 18.6667px; line-height: 34.2857px;" data-mce-style="font-size: 18.6667px; line-height: 34.2857px;"><strong><span style="font-size: 18pt;" data-mce-style="font-size: 18pt;">⑥：Connection</span></strong><br>网络连接，比如一个TCP连接。<br><strong><span style="font-size: 18pt;" data-mce-style="font-size: 18pt;">⑦：Channel</span></strong><br>信道，多路复用连接中的一条独立的双向数据流通道。信道是建立在真实的TCP连接内的虚<br>拟连接，AMQP 命令都是通过信道发出去的，不管是发布消息、订阅队列还是接收消息，这<br>些动作都是通过信道完成。因为对于操作系统来说建立和销毁 TCP 都是非常昂贵的开销，所<br>以引入了信道的概念，以复用一条 TCP 连接。</span></p><p><span style="font-size: 18.6667px; line-height: 34.2857px;" data-mce-style="font-size: 18.6667px; line-height: 34.2857px;"><span style="font-size: 18pt;" data-mce-style="font-size: 18pt;"><strong>⑧：Consumer</strong></span><br>消息的消费者，表示一个从消息队列中取得消息的客户端应用程序。<br><strong><span style="font-size: 18pt;" data-mce-style="font-size: 18pt;">⑨：Virtual Host</span></strong><br>虚拟主机，表示一批交换器、消息队列和相关对象。虚拟主机是共享相同的身份认证和加<br>密环境的独立服务器域。每个 vhost 本质上就是一个 mini 版的 RabbitMQ 服务器，拥有<br>自己的队列、交换器、绑定和权限机制。vhost 是 AMQP 概念的基础，必须在连接时指定，<br>RabbitMQ 默认的 vhost 是 / 。</span></p><p><span style="font-size: 18.6667px; line-height: 34.2857px;" data-mce-style="font-size: 18.6667px; line-height: 34.2857px;"><strong><span style="font-size: 18pt;" data-mce-style="font-size: 18pt;">⑩：Broker</span></strong><br>表示消息队列服务器实体</span></p><p><span style="font-size: 18.6667px; line-height: 34.2857px;" data-mce-style="font-size: 18.6667px; line-height: 34.2857px;"><img src="第二-节-springboot整合篇-飞机篇_files/5c971e60266bba288d000008.png" alt="" data-mce-src="第二-节-springboot整合篇-飞机篇_files/5c971e60266bba288d000008.png"></span></p><p>&nbsp;<br></p><p><strong><span style="font-size: 18pt;" data-mce-style="font-size: 18pt;">5.7.3）交换机的特性以及分类</span></strong></p><p><img id="__LEANOTE_D_IMG_1553407704261" src="第二-节-springboot整合篇-飞机篇_files/5c971ed8266bba288d00000a.png" alt="" data-mce-src="第二-节-springboot整合篇-飞机篇_files/5c971ed8266bba288d00000a.png"></p><p><br></p><p><img id="__LEANOTE_D_IMG_1553407760725" src="第二-节-springboot整合篇-飞机篇_files/5c971f10266bba288d00000d.png" alt="" data-mce-src="第二-节-springboot整合篇-飞机篇_files/5c971f10266bba288d00000d.png"></p><p><img src="第二-节-springboot整合篇-飞机篇_files/5c971f02266bba288d00000c.png" alt="" data-mce-src="第二-节-springboot整合篇-飞机篇_files/5c971f02266bba288d00000c.png"></p><p>&nbsp;<br></p><p><span style="font-size: 18pt;" data-mce-style="font-size: 18pt;"><strong>5.7.4) 整合三板斧</strong></span></p><p><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong>①:导入maven依赖</strong></span></p><pre id="leanote_ace_1553412269985_0" class="ace-tomorrow" draggable="false" data-mce-style="line-height: 1.5; font-size: 14px; height: 84px;">		&lt;dependency&gt;
+			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-boot-starter-amqp&lt;/artifactId&gt;
+		&lt;/dependency&gt;</pre><p><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong>②:查看自动配置以及对应的自动配置属性类</strong></span></p><pre id="leanote_ace_1553412313470_0" class="ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 2688px;">@Configuration
+@ConditionalOnClass({&nbsp;RabbitTemplate.class,&nbsp;Channel.class&nbsp;})
+@EnableConfigurationProperties(RabbitProperties.class)
+@Import(RabbitAnnotationDrivenConfiguration.class)
+public&nbsp;class&nbsp;RabbitAutoConfiguration&nbsp;{
+
+	@Configuration
+	@ConditionalOnMissingBean(ConnectionFactory.class)
+	protected&nbsp;static&nbsp;class&nbsp;RabbitConnectionFactoryCreator&nbsp;{
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//rabbitmq&nbsp;连接工厂
+		@Bean
+		public&nbsp;CachingConnectionFactory&nbsp;rabbitConnectionFactory(RabbitProperties&nbsp;properties,ObjectProvider&lt;ConnectionNameStrategy&gt;&nbsp;connectionNameStrategy)
+				throws&nbsp;Exception&nbsp;{
+			PropertyMapper&nbsp;map&nbsp;=&nbsp;PropertyMapper.get();
+			//创建连接工厂
+			CachingConnectionFactory&nbsp;factory&nbsp;=&nbsp;new&nbsp;CachingConnectionFactory(getRabbitConnectionFactoryBean(properties).getObject());
+			//连接地址
+			map.from(properties::determineAddresses).to(factory::setAddresses);
+			//生产端的消息确认
+			map.from(properties::isPublisherConfirms).to(factory::setPublisherConfirms);
+			//不可路由消息的处理
+			map.from(properties::isPublisherReturns).to(factory::setPublisherReturns);
+			//配置通信管道
+			RabbitProperties.Cache.Channel&nbsp;channel&nbsp;=&nbsp;properties.getCache().getChannel();
+			map.from(channel::getSize).whenNonNull().to(factory::setChannelCacheSize);
+			map.from(channel::getCheckoutTimeout).whenNonNull().as(Duration::toMillis)
+					.to(factory::setChannelCheckoutTimeout);
+			//配置管道缓存
+			RabbitProperties.Cache.Connection&nbsp;connection&nbsp;=&nbsp;properties.getCache()
+					.getConnection();
+			map.from(connection::getMode).whenNonNull().to(factory::setCacheMode);
+			map.from(connection::getSize).whenNonNull()
+					.to(factory::setConnectionCacheSize);
+			map.from(connectionNameStrategy::getIfUnique).whenNonNull()
+					.to(factory::setConnectionNameStrategy);
+			return&nbsp;factory;
+		}
+
+		
+	}
+
+	@Configuration
+	@Import(RabbitConnectionFactoryCreator.class)
+	protected&nbsp;static&nbsp;class&nbsp;RabbitTemplateConfiguration&nbsp;{
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//模版配置类
+		@Bean
+		@ConditionalOnSingleCandidate(ConnectionFactory.class)
+		@ConditionalOnMissingBean
+		public&nbsp;RabbitTemplate&nbsp;rabbitTemplate(ConnectionFactory&nbsp;connectionFactory)&nbsp;{
+			PropertyMapper&nbsp;map&nbsp;=&nbsp;PropertyMapper.get();
+			RabbitTemplate&nbsp;template&nbsp;=&nbsp;new&nbsp;RabbitTemplate(connectionFactory);
+			//配置消息转换器
+			MessageConverter&nbsp;messageConverter&nbsp;=&nbsp;this.messageConverter.getIfUnique();
+			if&nbsp;(messageConverter&nbsp;!=&nbsp;null)&nbsp;{
+				template.setMessageConverter(messageConverter);
+			}
+			//设置为true&nbsp;那么不可达消息会交给RetrunConfirm&nbsp;处理，若设置为false&nbsp;&nbsp;消息队列直接删除该消息
+			template.setMandatory(determineMandatoryFlag());
+			//配置模版属性
+			RabbitProperties.Template&nbsp;properties&nbsp;=&nbsp;this.properties.getTemplate();
+			if&nbsp;(properties.getRetry().isEnabled())&nbsp;{
+				template.setRetryTemplate(createRetryTemplate(properties.getRetry()));
+			}
+			//设置超时时间
+			map.from(properties::getReceiveTimeout).whenNonNull().as(Duration::toMillis)
+					.to(template::setReceiveTimeout);
+			//配置&nbsp;回复超时时间
+			map.from(properties::getReplyTimeout).whenNonNull().as(Duration::toMillis)
+					.to(template::setReplyTimeout);
+			//配置交换机
+			map.from(properties::getExchange).to(template::setExchange);
+			//配置路由key
+			map.from(properties::getRoutingKey).to(template::setRoutingKey);
+			return&nbsp;template;
+		}
+
+		private&nbsp;boolean&nbsp;determineMandatoryFlag()&nbsp;{
+			Boolean&nbsp;mandatory&nbsp;=&nbsp;this.properties.getTemplate().getMandatory();
+			return&nbsp;(mandatory&nbsp;!=&nbsp;null)&nbsp;?&nbsp;mandatory&nbsp;:&nbsp;this.properties.isPublisherReturns();
+		}
+
+		private&nbsp;RetryTemplate&nbsp;createRetryTemplate(RabbitProperties.Retry&nbsp;properties)&nbsp;{
+			PropertyMapper&nbsp;map&nbsp;=&nbsp;PropertyMapper.get();
+			RetryTemplate&nbsp;template&nbsp;=&nbsp;new&nbsp;RetryTemplate();
+			SimpleRetryPolicy&nbsp;policy&nbsp;=&nbsp;new&nbsp;SimpleRetryPolicy();
+			map.from(properties::getMaxAttempts).to(policy::setMaxAttempts);
+			template.setRetryPolicy(policy);
+			ExponentialBackOffPolicy&nbsp;backOffPolicy&nbsp;=&nbsp;new&nbsp;ExponentialBackOffPolicy();
+			map.from(properties::getInitialInterval).whenNonNull().as(Duration::toMillis)
+					.to(backOffPolicy::setInitialInterval);
+			map.from(properties::getMultiplier).to(backOffPolicy::setMultiplier);
+			map.from(properties::getMaxInterval).whenNonNull().as(Duration::toMillis)
+					.to(backOffPolicy::setMaxInterval);
+			template.setBackOffPolicy(backOffPolicy);
+			return&nbsp;template;
+		}
+
+		@Bean
+		@ConditionalOnSingleCandidate(ConnectionFactory.class)
+		@ConditionalOnProperty(prefix&nbsp;=&nbsp;"spring.rabbitmq",&nbsp;name&nbsp;=&nbsp;"dynamic",&nbsp;matchIfMissing&nbsp;=&nbsp;true)
+		@ConditionalOnMissingBean
+		public&nbsp;AmqpAdmin&nbsp;amqpAdmin(ConnectionFactory&nbsp;connectionFactory)&nbsp;{
+			return&nbsp;new&nbsp;RabbitAdmin(connectionFactory);
+		}
+
+	}
+
+	@Configuration
+	@ConditionalOnClass(RabbitMessagingTemplate.class)
+	@ConditionalOnMissingBean(RabbitMessagingTemplate.class)
+	@Import(RabbitTemplateConfiguration.class)
+	protected&nbsp;static&nbsp;class&nbsp;MessagingTemplateConfiguration&nbsp;{
+
+		@Bean
+		@ConditionalOnSingleCandidate(RabbitTemplate.class)
+		public&nbsp;RabbitMessagingTemplate&nbsp;rabbitMessagingTemplate(
+				RabbitTemplate&nbsp;rabbitTemplate)&nbsp;{
+			return&nbsp;new&nbsp;RabbitMessagingTemplate(rabbitTemplate);
+		}
+
+	}
+
+}
+</pre><p><span style="font-size: 24px; line-height: 34.2857px;" data-mce-style="font-size: 24px; line-height: 34.2857px;"><strong>③：在yml文件中 配置关键属性</strong></span></p><pre id="leanote_ace_1553413634669_0" class="ace-tomorrow" data-mce-style="line-height: 1.5; font-size: 14px; height: 1785px;">public&nbsp;class&nbsp;RabbitProperties&nbsp;{
+
+	/**
+	&nbsp;*&nbsp;RabbitMQ&nbsp;host.
+	&nbsp;*/
+	private&nbsp;String&nbsp;host&nbsp;=&nbsp;"localhost";
+
+	/**
+	&nbsp;*&nbsp;RabbitMQ&nbsp;port.
+	&nbsp;*/
+	private&nbsp;int&nbsp;port&nbsp;=&nbsp;5672;
+
+	/**
+	&nbsp;*&nbsp;Login&nbsp;user&nbsp;to&nbsp;authenticate&nbsp;to&nbsp;the&nbsp;broker.
+	&nbsp;*/
+	private&nbsp;String&nbsp;username&nbsp;=&nbsp;"guest";
+
+	/**
+	&nbsp;*&nbsp;Login&nbsp;to&nbsp;authenticate&nbsp;against&nbsp;the&nbsp;broker.
+	&nbsp;*/
+	private&nbsp;String&nbsp;password&nbsp;=&nbsp;"guest";
+
+	/**
+	&nbsp;*&nbsp;SSL&nbsp;configuration.
+	&nbsp;*/
+	private&nbsp;final&nbsp;Ssl&nbsp;ssl&nbsp;=&nbsp;new&nbsp;Ssl();
+
+	/**
+	&nbsp;*&nbsp;Virtual&nbsp;host&nbsp;to&nbsp;use&nbsp;when&nbsp;connecting&nbsp;to&nbsp;the&nbsp;broker.
+	&nbsp;*/
+	private&nbsp;String&nbsp;virtualHost;
+
+	/**
+	&nbsp;*&nbsp;Comma-separated&nbsp;list&nbsp;of&nbsp;addresses&nbsp;to&nbsp;which&nbsp;the&nbsp;client&nbsp;should&nbsp;connect.
+	&nbsp;*/
+	private&nbsp;String&nbsp;addresses;
+
+	/**
+	&nbsp;*&nbsp;Requested&nbsp;heartbeat&nbsp;timeout;&nbsp;zero&nbsp;for&nbsp;none.&nbsp;If&nbsp;a&nbsp;duration&nbsp;suffix&nbsp;is&nbsp;not&nbsp;specified,
+	&nbsp;*&nbsp;seconds&nbsp;will&nbsp;be&nbsp;used.
+	&nbsp;*/
+	@DurationUnit(ChronoUnit.SECONDS)
+	private&nbsp;Duration&nbsp;requestedHeartbeat;
+
+	/**
+	&nbsp;*&nbsp;Whether&nbsp;to&nbsp;enable&nbsp;publisher&nbsp;confirms.
+	&nbsp;*/
+	private&nbsp;boolean&nbsp;publisherConfirms;
+
+	/**
+	&nbsp;*&nbsp;Whether&nbsp;to&nbsp;enable&nbsp;publisher&nbsp;returns.
+	&nbsp;*/
+	private&nbsp;boolean&nbsp;publisherReturns;
+
+	/**
+	&nbsp;*&nbsp;Connection&nbsp;timeout.&nbsp;Set&nbsp;it&nbsp;to&nbsp;zero&nbsp;to&nbsp;wait&nbsp;forever.
+	&nbsp;*/
+	private&nbsp;Duration&nbsp;connectionTimeout;
+
+	/**
+	&nbsp;*&nbsp;Cache&nbsp;configuration.
+	&nbsp;*/
+	private&nbsp;final&nbsp;Cache&nbsp;cache&nbsp;=&nbsp;new&nbsp;Cache();
+
+	/**
+	&nbsp;*&nbsp;Listener&nbsp;container&nbsp;configuration.
+	&nbsp;*/
+	private&nbsp;final&nbsp;Listener&nbsp;listener&nbsp;=&nbsp;new&nbsp;Listener();
+
+	private&nbsp;final&nbsp;Template&nbsp;template&nbsp;=&nbsp;new&nbsp;Template();
+
+	private&nbsp;List&lt;Address&gt;&nbsp;parsedAddresses;
+​
+
+#可配置常用属性
+spring:
+&nbsp;&nbsp;rabbitmq:
+&nbsp;&nbsp;&nbsp;&nbsp;host:&nbsp;47.104.128.10
+&nbsp;&nbsp;&nbsp;&nbsp;port:&nbsp;5672
+&nbsp;&nbsp;&nbsp;&nbsp;virtual-host:&nbsp;tulingvip-springboot-rabbitmq
+&nbsp;&nbsp;&nbsp;&nbsp;username:&nbsp;guest
+&nbsp;&nbsp;&nbsp;&nbsp;password:&nbsp;guest
+&nbsp;&nbsp;&nbsp;&nbsp;connection-timeout:&nbsp;5000
+&nbsp;&nbsp;&nbsp;&nbsp;template:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mandatory:&nbsp;true</pre><p>&nbsp;<br></p><p><strong><span style="font-size: 18pt;" data-mce-style="font-size: 18pt;">6)springboot整合 actuator 监控管理</span></strong></p><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;">通过引入spring-boot-starter-actuator，可以使用Spring Boot为我们提供的准<br>生产环境下的应用监控和管理功能。我们可以通过HTTP，JMX，SSH协议来进<br>行操作，自动得到审计、健康及指标信息等</span></p><p><strong><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;">6.1)监控访问路径前缀&nbsp;</span></strong></p><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;">management.endpoints.web.base-path=﻿​/actuator &nbsp; &nbsp;这个是springboot监控默认的 我们可以修改为自己的</span></p><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;"><img src="第二-节-springboot整合篇-飞机篇_files/5c977e87266bba288d00000e.png" alt="" data-mce-src="第二-节-springboot整合篇-飞机篇_files/5c977e87266bba288d00000e.png"></span></p><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;">management.endpoints.web.base-path=/tulingMonitor&nbsp;</span></p><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;"><img src="第二-节-springboot整合篇-飞机篇_files/5c977ea5266bba288d00000f.png" alt="" data-mce-src="第二-节-springboot整合篇-飞机篇_files/5c977ea5266bba288d00000f.png"></span></p><p>&nbsp;<br></p><p><span style="color: #ff0000;" data-mce-style="color: #ff0000;"><strong><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;">总结 不管监控路径 是默认的还是 自己修改的, 为了安全起见，必须要通过spring security 来控制访问权限以免暴露你的服务信息</span></strong></span><br></p><p><span style="color: #ff0000;" data-mce-style="color: #ff0000;"><strong><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;">&nbsp;</span></strong></span><br></p><p><strong><span style="color: #000000;" data-mce-style="color: #000000;"><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;">6.2) http 健康监控端点 默认只暴露了 </span><span style="font-size: 14pt; color: #ff0000;" data-mce-style="font-size: 14pt; color: #ff0000;">health,info</span><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;">端点</span></span></strong></p><p><strong><span style="color: #000000;" data-mce-style="color: #000000;"><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;"><img src="第二-节-springboot整合篇-飞机篇_files/5c978030266bba288d000010.png" alt="" data-mce-src="第二-节-springboot整合篇-飞机篇_files/5c978030266bba288d000010.png"></span></span></strong></p><p><span style="color: #000000; font-size: 14pt;" data-mce-style="color: #000000; font-size: 14pt;">①:通过&nbsp;management.endpoints.web.exposure.include=*​ &nbsp;来指定开放所有的端点</span></p><p><span style="color: #000000; font-size: 14pt;" data-mce-style="color: #000000; font-size: 14pt;"><img src="第二-节-springboot整合篇-飞机篇_files/5c9780a8266bba288d000011.png" alt="" data-mce-src="第二-节-springboot整合篇-飞机篇_files/5c9780a8266bba288d000011.png"></span></p><p></p><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;">②:通过&nbsp;management.endpoints.web.exposure.include=health,info,beans &nbsp;通过逗号分开来指定开放哪些端点​</span></p><p><span style="font-size: 18.6667px; line-height: 26.6667px;" data-mce-style="font-size: 18.6667px; line-height: 26.6667px;">或者也可以通过&nbsp;management.endpoint.具体端点.enabled=true​|false 来开放或者打开哪些端点</span></p><p><span style="font-size: 18.6667px; line-height: 26.6667px;" data-mce-style="font-size: 18.6667px; line-height: 26.6667px;"><br data-mce-bogus="1"></span></p><p><span style="color: #ff0000;" data-mce-style="color: #ff0000;"><strong><span style="font-size: 18.6667px; line-height: 26.6667px;" data-mce-style="font-size: 18.6667px; line-height: 26.6667px;">6.3)具体端点分析</span></strong></span></p><p><span color="#ff0000" style="color: #000000;" data-mce-style="color: #000000;"><span style="font-size: 18.6667px; line-height: 26.6667px;" data-mce-style="font-size: 18.6667px; line-height: 26.6667px;"><b>1)服务监控端点&nbsp;<a href="http://localhost:8080//tulingMonitor/health">http://localhost:8080//tulingMonitor/health</a>&nbsp;&nbsp;</b></span></span></p><p><span color="#ff0000" style="color: #000000;" data-mce-style="color: #000000;"><span style="font-size: 18.6667px; line-height: 26.6667px;" data-mce-style="font-size: 18.6667px; line-height: 26.6667px;"><b><img src="第二-节-springboot整合篇-飞机篇_files/5c97823b266bba288d000012.png" alt="" data-mce-src="第二-节-springboot整合篇-飞机篇_files/5c97823b266bba288d000012.png"></b></span></span></p><p></p><p><span color="#ff0000" style="color: #000000;" data-mce-style="color: #000000;"><span style="font-size: 18.6667px; line-height: 26.6667px;" data-mce-style="font-size: 18.6667px; line-height: 26.6667px;"><b>2）审计事件监控端点 http://localhost:8080//tulingMonitor/auditevents</b></span></span></p><p><span color="#ff0000" style="color: #000000;" data-mce-style="color: #000000;"><span style="font-size: 18.6667px; line-height: 26.6667px;" data-mce-style="font-size: 18.6667px; line-height: 26.6667px;"><b><img src="第二-节-springboot整合篇-飞机篇_files/5c9782ba266bba288d000013.png" alt="" data-mce-src="第二-节-springboot整合篇-飞机篇_files/5c9782ba266bba288d000013.png"></b></span></span></p><p><span style="font-size: 14pt; color: #000000;" data-mce-style="font-size: 14pt; color: #000000;"><strong><br data-mce-bogus="1"></strong></span></p><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;"><strong>3) 服务装配bean的报告 端点:&nbsp;<a href="http://localhost:8080//tulingMonitor/beans">http://localhost:8080//tulingMonitor/beans</a></strong></span></p><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;"><strong><img src="第二-节-springboot整合篇-飞机篇_files/5c9782fc266bba288d000014.png" alt="" data-mce-src="第二-节-springboot整合篇-飞机篇_files/5c9782fc266bba288d000014.png" width="1387" height="481"></strong></span></p><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;"><strong>4) 条件自动装配报告端点:  http://localhost:8080//tulingMonitor/conditions</strong></span></p><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;"><strong><img src="第二-节-springboot整合篇-飞机篇_files/5c97836f266bba288d000015.png" alt="" data-mce-src="第二-节-springboot整合篇-飞机篇_files/5c97836f266bba288d000015.png" width="769" height="258"><img src="第二-节-springboot整合篇-飞机篇_files/5c97839a266bba288d000016.png" alt="" data-mce-src="第二-节-springboot整合篇-飞机篇_files/5c97839a266bba288d000016.png"></strong></span></p><p></p><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;"><strong>5) &nbsp;配置属性(配置前缀)端点 &nbsp;<a href="http://localhost:8080/tulingMonitor/configprops">http://localhost:8080/tulingMonitor/configprops</a></strong></span></p><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;"><strong><img src="第二-节-springboot整合篇-飞机篇_files/5c9783ed266bba288d000017.png" alt="" data-mce-src="第二-节-springboot整合篇-飞机篇_files/5c9783ed266bba288d000017.png"></strong></span></p><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;"><strong>6) 服务环境端点 &nbsp;http://localhost:8080/tulingMonitor/env</strong></span></p><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;"><strong><img src="第二-节-springboot整合篇-飞机篇_files/5c978430266bba288d000018.png" alt="" data-mce-src="第二-节-springboot整合篇-飞机篇_files/5c978430266bba288d000018.png" width="682" height="501"></strong></span></p><p></p><p><strong><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;">7)应用 各个包 中的日志等级级别 端点 &nbsp;<a href="http://localhost:8080/tulingMonitor/loggers">http://localhost:8080/tulingMonitor/loggers</a></span></strong></p><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;"><img src="第二-节-springboot整合篇-飞机篇_files/5c9784a5266bba288d00001a.png" alt="" data-mce-src="第二-节-springboot整合篇-飞机篇_files/5c9784a5266bba288d00001a.png"></span></p><p></p><p><strong><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;">8）应用堆栈端点 &nbsp; &nbsp;<a href="http://localhost:8080/tulingMonitor/heapdump">http://localhost:8080/tulingMonitor/heapdump</a>&nbsp; 下载</span></strong></p><p><strong><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;">9) &nbsp;线程dump端点监控 &nbsp;&nbsp;http://localhost:8080/tulingMonitor/threaddump</span></strong></p><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;"><img src="第二-节-springboot整合篇-飞机篇_files/5c978560266bba288d00001b.png" alt="" data-mce-src="第二-节-springboot整合篇-飞机篇_files/5c978560266bba288d00001b.png" width="740" height="567"></span></p><p></p><p><strong><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;">10) 各项应用指标端点:&nbsp;<a href="http://localhost:8080/tulingMonitor/metrics">http://localhost:8080/tulingMonitor/metrics</a></span></strong></p><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;"><img src="第二-节-springboot整合篇-飞机篇_files/5c9785ef266bba288d00001d.png" alt="" data-mce-src="第二-节-springboot整合篇-飞机篇_files/5c9785ef266bba288d00001d.png"></span></p><p><br data-mce-bogus="1"></p><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;"><strong>11)定时任务端点&nbsp;http://localhost:8080/tulingMonitor/scheduledtasks</strong></span></p><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;"><strong><img src="第二-节-springboot整合篇-飞机篇_files/5c978632266bba288d00001f.png" alt="" data-mce-src="第二-节-springboot整合篇-飞机篇_files/5c978632266bba288d00001f.png"></strong></span></p><p></p><p><br data-mce-bogus="1"></p><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;"><strong>12) 应用映射端点&nbsp;<a href="http://localhost:8080/tulingMonitor/mappings">http://localhost:8080/tulingMonitor/mappings</a></strong></span></p><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;"><strong><img src="第二-节-springboot整合篇-飞机篇_files/5c97867d266bba288d000020.png" alt="" data-mce-src="第二-节-springboot整合篇-飞机篇_files/5c97867d266bba288d000020.png"></strong></span></p><p><br data-mce-bogus="1"></p><p><strong><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;">13）最新调用 监控端点: &nbsp;http://localhost:8080/tulingMonitor/httptrace</span></strong></p><p><img src="第二-节-springboot整合篇-飞机篇_files/5c978757266bba288d000021.png" alt="" data-mce-src="第二-节-springboot整合篇-飞机篇_files/5c978757266bba288d000021.png"></p><p><br data-mce-bogus="1"></p><p><strong><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;">14)自定义信息端点:&nbsp;http://localhost:8080/tulingMonitor/info</span></strong></p><p><img src="第二-节-springboot整合篇-飞机篇_files/5c97887c266bba288d000022.png" alt="" data-mce-src="第二-节-springboot整合篇-飞机篇_files/5c97887c266bba288d000022.png"></p><p>&nbsp;<br></p><p>&nbsp;<br></p><p>&nbsp;<br></p><p>&nbsp;<br></p><p>&nbsp;<br></p><p>&nbsp;<br></p><p>&nbsp;<br></p><p>&nbsp;<br></p><p>&nbsp;<br></p><p>&nbsp;<br></p></div>
+	</div>
+
+<!-- 该js供其它处理 -->
+<script src="../leanote-html.js"></script>
+</body>
+</html>

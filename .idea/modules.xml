@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/demo-jdbc/demo-jdbc.iml" filepath="$PROJECT_DIR$/demo-jdbc/demo-jdbc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo-mybaits/demo-mybaits.iml" filepath="$PROJECT_DIR$/demo-mybaits/demo-mybaits.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo-rabbitmq/demo-rabbitmq.iml" filepath="$PROJECT_DIR$/demo-rabbitmq/demo-rabbitmq.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo-redis/demo-redis.iml" filepath="$PROJECT_DIR$/demo-redis/demo-redis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo-swagger2/demo-swagger2.iml" filepath="$PROJECT_DIR$/demo-swagger2/demo-swagger2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo1/demo1.iml" filepath="$PROJECT_DIR$/demo1/demo1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springboot-tuling-study.iml" filepath="$PROJECT_DIR$/springboot-tuling-study.iml" />
+    </modules>
+  </component>
+</project>

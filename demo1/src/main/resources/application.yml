@@ -1,0 +1,24 @@
+server:
+  port: 8081
+logging:
+  level:
+    org.springframework.web: TRACE
+#  servlet:
+#    context-path: /tuling01
+#spring:
+#  profiles:
+#    active: dev
+#
+#---
+##  \u5F00\u53D1\u73AF\u5883\u914D\u7F6E
+#spring:
+#  profiles: dev
+#server:
+#  port: 8082
+#
+#---
+##  \u751F\u4EA7\u73AF\u5883\u914D\u7F6E
+#spring:
+#  profiles: prod
+#server:
+#port: 8083
